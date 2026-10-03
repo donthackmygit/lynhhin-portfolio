@@ -1,0 +1,136 @@
+export const profile = {
+  name: "Khuất Nguyễn Thảo Linh",
+  shortName: "Lynhin",
+  initials: "lh.",
+  location: "Hà Nội, Việt Nam",
+  email: "khuatlinh0601@gmail.com",
+  phone: "+84 902 025 828",
+  phoneHref: "+84902025828",
+  whatsapp: "https://wa.me/84902025828",
+  cv: null as string | null,
+  hanoiRecommendationsUrl:
+    "https://nextbylocal.com/@lynhhinxinchao/lynhhin-hanoi-recomendation?utm_source=nextbylocal&utm_medium=network&utm_campaign=explore",
+  isPlaceholder: false,
+  availability: "Kết nối cho những cơ hội trong lĩnh vực du lịch",
+  disciplines: ["Tour guiding", "Culture", "Tour operations"],
+  hero: {
+    eyebrow: "LYNHIN / TRAVEL & CULTURE",
+    greeting: "Xin chào, tôi là",
+    firstLine: "Khuất Nguyễn",
+    secondLine: "Thảo Linh.",
+    quote:
+      "I don't just want to show people Vietnam — I want to help them understand it.",
+    introduction: "Trên những chuyến đi, mọi người thường gọi tôi là Lynhin.",
+    primaryCta: "Khám phá hành trình",
+    secondaryCta: "Kết nối với tôi",
+    imageLocation: "Hội An, Việt Nam",
+    imageCaption: "Lịch sử, con người và văn hóa địa phương.",
+    bottomNote: "Một hành trình để hiểu hơn về Việt Nam.",
+  },
+  about: {
+    eyebrow: "VỀ TÔI",
+    title: "Không chỉ đi để thấy.",
+    italicTitle: "Đi để hiểu và kết nối.",
+    lead: "Tôi yêu thích những hành trình giúp mình hiểu thêm về lịch sử, con người và văn hóa địa phương.",
+    paragraphs: [
+      "Xin chào, tôi là Khuất Nguyễn Thảo Linh — và trên những chuyến đi, mọi người thường gọi tôi là Lynhin. Với tôi, một chuyến đi đáng nhớ không chỉ nằm ở việc “đã đi đâu”, mà còn ở những câu chuyện, trải nghiệm và cảm xúc mà du khách mang về sau hành trình.",
+      "Tôi thích khám phá những điểm đến mới, đặc biệt là di tích lịch sử, văn hóa địa phương, phong tục và đời sống bản địa. Khi đến một nơi, tôi thường tò mò về câu chuyện phía sau địa danh đó: vì sao nơi ấy tồn tại, điều gì đã hình thành nên văn hóa nơi đây và đâu là những nét khiến vùng đất ấy trở nên khác biệt.",
+      "Tôi định hướng phát triển trong lĩnh vực hướng dẫn du lịch, thiết kế trải nghiệm văn hóa và vận hành tour, đặc biệt với các hành trình liên quan đến văn hóa, lịch sử và trải nghiệm địa phương. Tôi mong muốn được làm việc với cả khách Việt Nam và khách quốc tế, đồng thời từng bước phát triển khả năng kể chuyện và thiết kế những trải nghiệm du lịch có ý nghĩa.",
+    ],
+    interests: [
+      "Di tích lịch sử",
+      "Văn hóa địa phương",
+      "Phong tục",
+      "Đời sống bản địa",
+    ],
+    imageCaption:
+      "Cảm hứng từ văn hóa Việt Nam · Ảnh minh họa, không phải chân dung Lynhin",
+    facts: [
+      { label: "CÒN ĐƯỢC GỌI LÀ", value: "Lynhin" },
+      { label: "XUẤT PHÁT ĐIỂM", value: "Sinh viên kinh tế" },
+      {
+        label: "ĐỊNH HƯỚNG",
+        value: "Hướng dẫn du lịch · Trải nghiệm văn hóa · Vận hành tour",
+      },
+    ],
+  },
+  contact: {
+    eyebrow: "LIÊN HỆ",
+    title: "Cùng tạo nên",
+    italicTitle: "những hành trình có ý nghĩa.",
+    description:
+      "Quan tâm đến các cơ hội trong lĩnh vực hướng dẫn du lịch, trải nghiệm văn hóa, vận hành tour và sáng tạo nội dung du lịch.",
+    cta: "Gửi email cho tôi",
+    mailSubject: "Kết nối cùng Lynhin - Cơ hội trong lĩnh vực du lịch",
+  },
+  footer: {
+    tagline: "Hiểu Việt Nam qua lịch sử, con người và văn hóa địa phương.",
+    note: "Khuất Nguyễn Thảo Linh · Lynhin",
+  },
+};
+
+export const navigation = [
+  { id: "trang-chu", label: "Trang chủ" },
+  { id: "ve-toi", label: "Về tôi" },
+  { id: "hanh-trinh", label: "Trải nghiệm" },
+  { id: "du-an", label: "Dự án" },
+  { id: "goc-du-lich", label: "Du lịch & Văn hóa" },
+  { id: "lien-he", label: "Liên hệ" },
+];
+
+export const sectionCopy = {
+  journey: {
+    eyebrow: "KINH NGHIỆM & HOẠT ĐỘNG",
+    title: "Những trải nghiệm,",
+    italic: "những kết nối.",
+    description:
+      "Từ hỗ trợ tour thực tế đến đồng hành cùng sinh viên quốc tế tại Trường Đại học Ngoại thương.",
+    note: "Tiếp tục học hỏi qua từng hành trình.",
+  },
+  projects: {
+    eyebrow: "DỰ ÁN NỔI BẬT",
+    title: "Giới thiệu Việt Nam.",
+    italic: "Kết nối những góc nhìn.",
+    description:
+      "Một tour văn hóa dành cho sinh viên quốc tế và những gợi ý khám phá Hà Nội từ góc nhìn địa phương.",
+    detailLabel: "Khám phá dự án",
+    briefLabel: "Tổng quan dự án",
+    roleLabel: "Vai trò và trải nghiệm",
+    challengeLabel: "Thách thức",
+    approachLabel: "Đóng góp trong dự án",
+    deliverablesLabel: "Trải nghiệm & nội dung",
+    takeawayLabel: "Điều tôi học được",
+  },
+  culture: {
+    eyebrow: "GÓC DU LỊCH / VĂN HÓA",
+    title: "Travel & Culture Lens.",
+    italic: "Góc nhìn của Lynhin.",
+    description:
+      "Tìm hiểu những câu chuyện phía sau địa danh, phong tục và nét văn hóa Việt Nam.",
+    introduction:
+      "Dẫu xuất phát điểm của tôi là một sinh viên kinh tế, tôi luôn có thói quen tìm hiểu những câu chuyện phía sau các địa danh, phong tục và nét văn hóa Việt Nam. Tôi thường tự hỏi vì sao một con phố có tên như vậy, một truyền thống bắt nguồn từ đâu hay điều gì đã hình thành nên cách sống của người Việt ngày nay. Chính sự tò mò đó khiến tôi chủ động đọc thêm về lịch sử, truyền thống và văn hóa Việt Nam, đồng thời học cách biến kiến thức thành những câu chuyện dễ hiểu và thú vị hơn đối với du khách.",
+    noteLabel: "CHỦ ĐỀ GỢI MỞ",
+    experienceLabel: "Những câu hỏi tôi muốn tìm hiểu",
+    detailLabel: "Khám phá góc nhìn",
+  },
+  skills: {
+    eyebrow: "KỸ NĂNG",
+    title: "Hành trang",
+    italic: "cho những chuyến đi.",
+    description:
+      "Giao tiếp, nghiên cứu điểm đến, phối hợp hoạt động và sáng tạo nội dung du lịch.",
+  },
+  achievements: {
+    eyebrow: "THÀNH TÍCH & CHỨNG CHỈ",
+    title: "Ngôn ngữ,",
+    italic: "những cánh cửa kết nối.",
+    description: "IELTS 7.0 và DELF B1 — French Language Diploma.",
+  },
+  strengths: {
+    eyebrow: "ĐIỂM MẠNH",
+    title: "Những giá trị tôi mang đến",
+    italic: "cho một chuyến tour.",
+    description:
+      "Thân thiện, linh hoạt, hợp tác và chủ động học hỏi trong môi trường đa văn hóa.",
+  },
+};

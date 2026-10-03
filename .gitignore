@@ -1,0 +1,10 @@
+node_modules/
+.next/
+tmp/
+out/
+.env*
+!.env.example
+*.tsbuildinfo
+next-env.d.ts
+dev-server.log
+dev-server-error.log
