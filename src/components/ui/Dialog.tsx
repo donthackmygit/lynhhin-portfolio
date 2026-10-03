@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useLanguage } from "@/components/language/LanguageProvider";
 
 type DialogProps = {
   open: boolean;
@@ -20,6 +21,9 @@ export function Dialog({
   children,
   className = "",
 }: DialogProps) {
+  const {
+    content: { ui },
+  } = useLanguage();
   const titleId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -118,8 +122,8 @@ export function Dialog({
               type="button"
               className="icon-button dialog-close"
               onClick={onClose}
-              aria-label="Đóng cửa sổ"
-              title="Đóng"
+              aria-label={ui.closeDialog}
+              title={ui.close}
             >
               <X size={21} />
             </button>

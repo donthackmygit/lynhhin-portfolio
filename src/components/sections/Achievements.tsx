@@ -1,10 +1,14 @@
+"use client";
+
 import { ArrowUpRight, Award } from "lucide-react";
-import { achievements } from "@/data/achievements";
-import { sectionCopy } from "@/data/profile";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function Achievements() {
+  const {
+    content: { achievements, sectionCopy },
+  } = useLanguage();
   const copy = sectionCopy.achievements;
   return (
     <section
@@ -14,7 +18,7 @@ export function Achievements() {
     >
       <div className="container">
         <SectionHeading
-          number="06"
+          number="05"
           eyebrow={copy.eyebrow}
           title={copy.title}
           italic={copy.italic}

@@ -2,9 +2,7 @@
 
 import { ArrowUpRight, Check, Plus } from "lucide-react";
 import { useState } from "react";
-import { projects } from "@/data/projects";
-import { sectionCopy } from "@/data/profile";
-import type { Project } from "@/data/types";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
 import { Reveal, Stagger } from "@/components/ui/Reveal";
@@ -12,7 +10,11 @@ import { Dialog } from "@/components/ui/Dialog";
 import { ProjectLink } from "@/components/ui/ProjectLink";
 
 export function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null);
+  const {
+    content: { projects, sectionCopy, ui },
+  } = useLanguage();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selected = projects.find((project) => project.id === selectedId);
   const copy = sectionCopy.projects;
 
   return (
@@ -39,18 +41,18 @@ export function Projects() {
                 <button
                   type="button"
                   className="project-image-button"
-                  onClick={() => setSelected(project)}
-                  aria-label={`Xem dự án ${project.title}`}
+                  onClick={() => setSelectedId(project.id)}
+                  aria-label={`${ui.viewProject} ${project.title}`}
                 >
                   <JournalPhoto
                     image={project.image}
                     className="project-photo"
                   />
                   <span className="project-image-index">
-                    DỰ ÁN / {project.number}
+                    {ui.projectLabel} / {project.number}
                   </span>
                   <span className="project-image-caption">
-                    Hà Nội · Ảnh minh họa
+                    {ui.projectImageCaption}
                   </span>
                   <span className="project-image-open">
                     <Plus size={22} />
@@ -72,7 +74,7 @@ export function Projects() {
                   {project.stats && (
                     <Stagger className="project-stats">
                       {project.stats.map((stat, statIndex) => (
-                        <Reveal key={stat.label} delay={statIndex * 0.1}>
+                        <Reveal key={statIndex} delay={statIndex * 0.1}>
                           <span className="project-stat-value">
                             {stat.value}
                           </span>
@@ -84,7 +86,7 @@ export function Projects() {
                     </Stagger>
                   )}
                   <p className="project-role">
-                    <span>VAI TRÒ</span>
+                    <span>{ui.role}</span>
                     {project.role}
                   </p>
                   <ul className="inline-tags">
@@ -95,7 +97,7 @@ export function Projects() {
                   <button
                     type="button"
                     className="text-link"
-                    onClick={() => setSelected(project)}
+                    onClick={() => setSelectedId(project.id)}
                   >
                     {copy.detailLabel}
                     <ArrowUpRight size={19} />
@@ -109,8 +111,8 @@ export function Projects() {
       </div>
       <Dialog
         open={Boolean(selected)}
-        onClose={() => setSelected(null)}
-        title={selected?.title ?? "Chi tiết dự án"}
+        onClose={() => setSelectedId(null)}
+        title={selected?.title ?? ui.projectDetails}
         className="project-dialog"
       >
         {selected && (
@@ -133,7 +135,7 @@ export function Projects() {
               <h3>{selected.title}</h3>
               <p className="dialog-subtitle">{selected.subtitle}</p>
               <dl className="dialog-role">
-                <dt>VAI TRÒ</dt>
+                <dt>{ui.role}</dt>
                 <dd>{selected.role}</dd>
               </dl>
               <section>

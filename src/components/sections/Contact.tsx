@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowUpRight,
   Download,
@@ -5,10 +7,13 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
-import { profile } from "@/data/profile";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function Contact() {
+  const {
+    content: { profile, ui },
+  } = useLanguage();
   const copy = profile.contact;
   return (
     <section
@@ -19,7 +24,7 @@ export function Contact() {
       <div className="container">
         <Reveal>
           <div className="section-label">
-            <span className="section-number">08</span>
+            <span className="section-number">07</span>
             <span className="eyebrow">{copy.eyebrow}</span>
           </div>
         </Reveal>
@@ -45,7 +50,7 @@ export function Contact() {
               {profile.cv && (
                 <a href={profile.cv} download className="text-link contact-cv">
                   <Download size={16} />
-                  Tải CV
+                  {ui.downloadCv}
                 </a>
               )}
             </Reveal>
@@ -85,7 +90,7 @@ export function Contact() {
         <Reveal>
           <div className="contact-closing">
             <span className="contact-closing-line" />
-            <p>Hẹn gặp ở một hành trình mới.</p>
+            <p>{ui.contactClosing}</p>
             <span className="contact-signature">{profile.shortName}.</span>
           </div>
         </Reveal>

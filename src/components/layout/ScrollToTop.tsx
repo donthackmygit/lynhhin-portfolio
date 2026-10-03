@@ -3,8 +3,12 @@
 import { ArrowUp } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/language/LanguageProvider";
 
 export function ScrollToTop() {
+  const {
+    content: { ui },
+  } = useLanguage();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -23,8 +27,8 @@ export function ScrollToTop() {
         <motion.a
           href="#trang-chu"
           className="scroll-top icon-button"
-          title="Về đầu trang"
-          aria-label="Về đầu trang"
+          title={ui.backToTop}
+          aria-label={ui.backToTop}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 8 }}

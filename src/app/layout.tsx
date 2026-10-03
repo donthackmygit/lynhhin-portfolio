@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Lora } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
+import {
+  LanguageProvider,
+  SkipLink,
+} from "@/components/language/LanguageProvider";
 import { profile } from "@/data/profile";
 import { images } from "@/data/images";
 import "./globals.css";
@@ -23,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
-  title: `${profile.name} (Lynhin) | Travel & Culture`,
-  description: `${profile.name} — Lynhin. Hướng dẫn du lịch, thiết kế trải nghiệm văn hóa, vận hành tour và kết nối với du khách quốc tế.`,
-  applicationName: "Lynhin Travel Journal",
+  title: `${profile.name} (Lynhhin) | Travel & Culture`,
+  description: `${profile.name} — Lynhhin. Hướng dẫn du lịch, thiết kế trải nghiệm văn hóa, vận hành tour và kết nối với du khách quốc tế.`,
+  applicationName: "Lynhhin Travel Journal",
   openGraph: {
-    title: `${profile.name} (Lynhin) | Travel & Culture`,
+    title: `${profile.name} (Lynhhin) | Travel & Culture`,
     description: profile.hero.quote,
     type: "website",
     locale: "vi_VN",
@@ -50,12 +54,12 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${lora.variable} ${beVietnam.variable}`}>
       <body>
-        <a className="skip-link" href="#noi-dung">
-          Đến nội dung chính
-        </a>
-        <MotionProvider>
-          <PageTransition>{children}</PageTransition>
-        </MotionProvider>
+        <LanguageProvider>
+          <SkipLink />
+          <MotionProvider>
+            <PageTransition>{children}</PageTransition>
+          </MotionProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

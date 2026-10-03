@@ -1,6 +1,7 @@
+"use client";
+
 import { BookOpen, Ear, Globe2, Route } from "lucide-react";
-import { strengths } from "@/data/skills";
-import { sectionCopy } from "@/data/profile";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal, Stagger } from "@/components/ui/Reveal";
 
@@ -12,6 +13,9 @@ const icons = {
 };
 
 export function Strengths() {
+  const {
+    content: { strengths, sectionCopy },
+  } = useLanguage();
   const copy = sectionCopy.strengths;
   return (
     <section
@@ -21,7 +25,7 @@ export function Strengths() {
     >
       <div className="container">
         <SectionHeading
-          number="07"
+          number="06"
           eyebrow={copy.eyebrow}
           title={copy.title}
           italic={copy.italic}

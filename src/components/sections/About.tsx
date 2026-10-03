@@ -1,11 +1,15 @@
+"use client";
+
 import { ArrowUpRight, MapPin } from "lucide-react";
-import { profile } from "@/data/profile";
-import { images } from "@/data/images";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function About() {
+  const {
+    content: { profile, images, ui },
+  } = useLanguage();
   return (
     <section
       id="ve-toi"
@@ -29,7 +33,7 @@ export function About() {
                 sizes="(max-width: 767px) 90vw, 40vw"
               />
               <figcaption>
-                <span>01 / MỘT CHÚT CẢM HỨNG</span>
+                <span>{ui.aboutImageEyebrow}</span>
                 <span>{profile.about.imageCaption}</span>
               </figcaption>
             </figure>
@@ -43,12 +47,12 @@ export function About() {
               <p className="about-lead">{profile.about.lead}</p>
             </Reveal>
             {profile.about.paragraphs.map((paragraph, index) => (
-              <Reveal key={paragraph} delay={0.1 + index * 0.06}>
+              <Reveal key={index} delay={0.1 + index * 0.06}>
                 <p className="about-paragraph">{paragraph}</p>
               </Reveal>
             ))}
             <Reveal delay={0.16}>
-              <ul className="interest-list" aria-label="Sở thích">
+              <ul className="interest-list" aria-label={ui.interests}>
                 {profile.about.interests.map((interest) => (
                   <li key={interest}>{interest}</li>
                 ))}
@@ -64,7 +68,7 @@ export function About() {
                 ))}
               </dl>
               <a href="#hanh-trinh" className="text-link">
-                Đi tiếp cùng mình
+                {ui.continueJourney}
                 <ArrowUpRight size={18} />
               </a>
             </Reveal>

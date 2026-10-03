@@ -5,6 +5,7 @@ import type { Project } from "./types";
 export const projects: Project[] = [
   {
     id: "discover-vietnam-on-us",
+    year: "2025",
     number: "01",
     title: "DISCOVER VIETNAM, ON US",
     subtitle:
@@ -33,9 +34,9 @@ export const projects: Project[] = [
       "Tôi nhận ra rằng một tour tốt không chỉ phụ thuộc vào kiến thức về điểm đến, mà còn đòi hỏi khả năng thích ứng, giao tiếp, làm việc nhóm, quan sát khách và xử lý những thay đổi ngoài kế hoạch.",
   },
   {
-    id: "lynhins-hanoi-recommendations",
+    id: "lynhhins-hanoi-recommendations",
     number: "02",
-    title: "Lynhin's Hanoi Recommendations",
+    title: "Lynhhin's Hanoi Recommendations",
     subtitle: "Khám phá Hà Nội từ góc nhìn của một người địa phương",
     description:
       "Một danh sách gợi ý trải nghiệm Hà Nội dành cho du khách, tập trung vào văn hóa, ẩm thực và những trải nghiệm mang dấu ấn bản địa.",
@@ -60,7 +61,7 @@ export const projects: Project[] = [
     takeaway:
       "Dự án thể hiện khả năng nghiên cứu điểm đến, hiểu biết địa phương, chọn lọc và xây dựng gợi ý du lịch, thấu hiểu nhu cầu của du khách và sáng tạo nội dung du lịch.",
     link: {
-      label: "Explore My Hanoi Recommendations",
+      label: "Khám phá gợi ý Hà Nội của tôi",
       url: profile.hanoiRecommendationsUrl,
     },
   },

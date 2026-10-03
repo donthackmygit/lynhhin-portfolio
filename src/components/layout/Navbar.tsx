@@ -3,12 +3,17 @@
 import { ArrowUpRight, Download, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { navigation, profile } from "@/data/profile";
+import { useLanguage } from "@/components/language/LanguageProvider";
+import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
 export function Navbar() {
+  const {
+    content: { navigation, profile, ui },
+  } = useLanguage();
   const { activeSection, scrolled } = useActiveSection();
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
@@ -33,15 +38,18 @@ export function Navbar() {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
       if (event.key !== "Tab") return;
-      const links = Array.from(
-        menuRef.current?.querySelectorAll<HTMLAnchorElement>("a") ?? [],
-      );
-      const last = links[links.length - 1];
+      const controls = Array.from(
+        headerRef.current?.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled])",
+        ) ?? [],
+      ).filter((element) => element.getClientRects().length > 0);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
       if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
-        toggleRef.current?.focus();
+        first?.focus();
       }
-      if (event.shiftKey && document.activeElement === toggleRef.current) {
+      if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last?.focus();
       }
@@ -64,12 +72,15 @@ export function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header
+      ref={headerRef}
+      className={`site-header ${scrolled ? "is-scrolled" : ""}`}
+    >
       <div className="nav-container">
         <a
           href="#trang-chu"
           className="brand"
-          aria-label={`${profile.name} - Trang chủ`}
+          aria-label={`${profile.name} - ${navigation[0].label}`}
           onClick={() => setMenuOpen(false)}
         >
           <span className="brand-monogram">{profile.initials}</span>
@@ -78,7 +89,7 @@ export function Navbar() {
             <span>TRAVEL JOURNAL</span>
           </span>
         </a>
-        <nav className="desktop-nav" aria-label="Điều hướng chính">
+        <nav className="desktop-nav" aria-label={ui.mainNavigation}>
           {navigation.map((item) => (
             <a
               key={item.id}
@@ -90,28 +101,31 @@ export function Navbar() {
             </a>
           ))}
         </nav>
-        <a
-          href={profile.cv ?? "#lien-he"}
-          download={profile.cv ? true : undefined}
-          className="nav-cv"
-          aria-label={profile.cv ? "Tải CV" : "Liên hệ Lynhin"}
-          title={profile.cv ? "Tải CV" : "Liên hệ Lynhin"}
-        >
-          {profile.cv ? <Download size={15} /> : <ArrowUpRight size={18} />}
-          <span>{profile.cv ? "Tải CV" : "Liên hệ"}</span>
-        </a>
-        <button
-          ref={toggleRef}
-          type="button"
-          className="icon-button menu-toggle"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={menuOpen ? "Đóng menu" : "Mở menu"}
-          title={menuOpen ? "Đóng menu" : "Mở menu"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <X size={23} /> : <Menu size={23} />}
-        </button>
+        <div className="nav-actions">
+          <LanguageSwitcher />
+          <a
+            href={profile.cv ?? "#lien-he"}
+            download={profile.cv ? true : undefined}
+            className="nav-cv"
+            aria-label={profile.cv ? ui.downloadCv : ui.contactName}
+            title={profile.cv ? ui.downloadCv : ui.contactName}
+          >
+            {profile.cv ? <Download size={15} /> : <ArrowUpRight size={18} />}
+            <span>{profile.cv ? ui.downloadCv : ui.contact}</span>
+          </a>
+          <button
+            ref={toggleRef}
+            type="button"
+            className="icon-button menu-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={menuOpen ? ui.closeMenu : ui.openMenu}
+            title={menuOpen ? ui.closeMenu : ui.openMenu}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X size={23} /> : <Menu size={23} />}
+          </button>
+        </div>
       </div>
       <AnimatePresence>
         {menuOpen && (
@@ -125,9 +139,9 @@ export function Navbar() {
             transition={{ duration: reduceMotion ? 0 : 0.25 }}
           >
             <p className="eyebrow">
-              MỘT HÀNH TRÌNH CÙNG {profile.shortName.toUpperCase()}
+              {ui.journeyWith} {profile.shortName.toUpperCase()}
             </p>
-            <nav aria-label="Điều hướng di động">
+            <nav aria-label={ui.mobileNavigation}>
               {navigation.map((item, index) => (
                 <a
                   key={item.id}
@@ -151,7 +165,7 @@ export function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               {profile.cv ? <Download size={17} /> : <ArrowUpRight size={19} />}
-              {profile.cv ? "Tải CV" : "Kết nối với tôi"}
+              {profile.cv ? ui.downloadCv : profile.hero.secondaryCta}
             </a>
             <p className="mobile-menu-location">{profile.location}</p>
           </motion.div>

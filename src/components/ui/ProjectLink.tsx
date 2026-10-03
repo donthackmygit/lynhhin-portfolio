@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/language/LanguageProvider";
 
 type ProjectLinkProps = {
   label: string;
@@ -10,6 +11,9 @@ type ProjectLinkProps = {
 };
 
 export function ProjectLink({ label, url }: ProjectLinkProps) {
+  const {
+    content: { ui },
+  } = useLanguage();
   const [qr, setQr] = useState<{ url: string; image: string } | null>(null);
 
   useEffect(() => {
@@ -52,7 +56,7 @@ export function ProjectLink({ label, url }: ProjectLinkProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
-        title="Mở Lynhin's Hanoi Recommendations"
+        title={ui.openRecommendations}
       >
         {qr?.url === url && (
           <Image
@@ -60,7 +64,7 @@ export function ProjectLink({ label, url }: ProjectLinkProps) {
             width={160}
             height={160}
             unoptimized
-            alt="Mã QR tới Lynhin's Hanoi Recommendations trên NextbyLocal"
+            alt={ui.qrRecommendations}
           />
         )}
         <span>NextbyLocal</span>

@@ -3,8 +3,7 @@
 import { MapPin, MoveDown } from "lucide-react";
 import { useRef } from "react";
 import type { gsap } from "gsap";
-import { experiences } from "@/data/experiences";
-import { sectionCopy } from "@/data/profile";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useScrollStory } from "@/hooks/useScrollStory";
 
@@ -56,8 +55,14 @@ function journeyAnimation(root: HTMLElement, animation: typeof gsap) {
 }
 
 export function Journey() {
+  const {
+    content: { experiences, sectionCopy, ui },
+  } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const copy = sectionCopy.journey;
+  const years = Array.from(
+    new Set(experiences.map((experience) => experience.year)),
+  );
   useScrollStory(ref, journeyAnimation);
 
   return (
@@ -73,53 +78,69 @@ export function Journey() {
           eyebrow={copy.eyebrow}
           title={copy.title}
           italic={copy.italic}
-          description={copy.description}
           id="journey-title"
         />
         <div className="journey-grid">
           <div className="journey-aside">
             <span className="journey-large-type">
-              Hành
+              {ui.journeyFirstLine}
               <br />
-              <em>trình.</em>
+              <em>{ui.journeySecondLine}</em>
             </span>
-            <p>
-              Học từ môi trường thực tế, từ những chuyến tour và từ những người
-              tôi đồng hành.
-            </p>
+            <p>{ui.journeyDescription}</p>
             <div className="journey-aside-line" />
             <MapPin size={20} strokeWidth={1.4} />
-            <span className="eyebrow">TRẢI NGHIỆM & KẾT NỐI</span>
+            <span className="eyebrow">{ui.journeyEyebrow}</span>
           </div>
           <ol className="journey-timeline">
             <li className="timeline-track" aria-hidden="true">
               <span className="timeline-progress" />
             </li>
-            {experiences.map((experience, index) => (
-              <li key={experience.id} className="timeline-item">
+            {years.map((year) => (
+              <li key={year} className="timeline-item">
                 <div className="timeline-marker">
-                  <span className="timeline-dot" />
-                  <span className="timeline-year">
-                    {experience.year ?? String(index + 1).padStart(2, "0")}
-                  </span>
+                  <time className="timeline-year" dateTime={year}>
+                    {year}
+                  </time>
+                  <span className="timeline-dot" aria-hidden="true" />
                 </div>
                 <div className="timeline-content">
-                  <div className="timeline-meta">
-                    <span className="eyebrow">{experience.category}</span>
-                    {experience.period && <time>{experience.period}</time>}
-                  </div>
-                  <h3>{experience.title}</h3>
-                  <p className="timeline-organization">
-                    {experience.organization}
-                  </p>
-                  <p className="timeline-description">
-                    {experience.description}
-                  </p>
-                  <ul className="inline-tags">
-                    {experience.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
+                  {experiences
+                    .filter((experience) => experience.year === year)
+                    .map((experience) => (
+                      <article
+                        key={experience.id}
+                        id={experience.id}
+                        className="timeline-activity"
+                      >
+                        <div className="timeline-meta">
+                          <span className="eyebrow">{experience.category}</span>
+                          {experience.period && (
+                            <span className="timeline-period">
+                              {experience.period}
+                            </span>
+                          )}
+                        </div>
+                        <h3>{experience.title}</h3>
+                        <p className="timeline-organization">
+                          {experience.organization}
+                        </p>
+                        <p className="timeline-description">
+                          {experience.description}
+                        </p>
+                        {experience.details?.map((detail, index) => (
+                          <div key={index} className="timeline-detail">
+                            <h4>{detail.title}</h4>
+                            <p>{detail.description}</p>
+                          </div>
+                        ))}
+                        <ul className="inline-tags">
+                          {experience.highlights.map((highlight) => (
+                            <li key={highlight}>{highlight}</li>
+                          ))}
+                        </ul>
+                      </article>
                     ))}
-                  </ul>
                 </div>
               </li>
             ))}

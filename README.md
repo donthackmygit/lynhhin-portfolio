@@ -1,4 +1,4 @@
-# Lynhin / Travel & Culture
+# Lynhhin / Travel & Culture
 
 Portfolio single-page theo concept **Vietnamese Cultural Editorial**, hướng tới ứng tuyển công ty du lịch. Next.js App Router, TypeScript, Tailwind CSS, Motion, GSAP ScrollTrigger và Lucide React.
 
@@ -24,19 +24,22 @@ Không có unit test, integration test hay E2E test. `npm run typecheck` kiểm 
 
 ## Thay nội dung
 
-Nội dung hiện tại được cập nhật theo file **Nội dung Portfolio - Trang tính1.pdf** do người dùng cung cấp: Khuất Nguyễn Thảo Linh (Lynhin), kinh nghiệm tại Onetrip with Local, hoạt động sinh viên quốc tế tại FTU, hai dự án, IELTS 7.0, DELF B1, email và WhatsApp. Không thêm ngày hoạt động hay ngày cấp chứng chỉ khi tài liệu không cung cấp.
+Nội dung được cập nhật theo file **Nội dung Portfolio - Trang tính1.pdf** và các ảnh chỉnh sửa do người dùng cung cấp: Khuất Nguyễn Thảo Linh (Lynhhin), Onetrip with Local, trao đổi tại Nara Women’s University ở Nhật Bản, hoạt động sinh viên quốc tế tại FTU, hai dự án, IELTS 7.0, DELF B1, email và WhatsApp. Timeline nhóm theo mốc người dùng cung cấp: 2024 Onetrip; 2025 Nhật Bản, FTU và tour văn hóa miễn phí; 2026 tiếp tục dẫn tour. Không thêm ngày cấp chứng chỉ khi tài liệu không cung cấp.
 
 | File                       | Nội dung                                                                 |
 | -------------------------- | ------------------------------------------------------------------------ |
 | `src/data/profile.ts`      | Tên, giới thiệu, liên hệ, liên kết CV, navigation và câu chữ các section |
 | `src/data/experiences.ts`  | Các cột mốc của timeline                                                 |
 | `src/data/projects.ts`     | Dự án và nội dung cửa sổ chi tiết                                        |
-| `src/data/destinations.ts` | Ba chủ đề gợi mở trong góc Du lịch / Văn hóa                             |
+| `src/data/english.ts`      | Bản dịch tiếng Anh của hồ sơ, timeline, dự án, kỹ năng và chứng chỉ      |
+| `src/data/content.ts`      | Nội dung theo ngôn ngữ, nhãn giao diện và nhãn hỗ trợ tiếp cận           |
 | `src/data/skills.ts`       | Kỹ năng và điểm mạnh                                                     |
 | `src/data/achievements.ts` | Thành tích, chứng chỉ                                                    |
 | `src/data/images.ts`       | Đường dẫn ảnh, crop, alt text, tác giả và nguồn tải                      |
 
-`profile.isPlaceholder` hiện là `false`. Phần Travel & Culture Lens phân biệt các góc nhìn có thể phát triển với bài viết đã hoàn thành. Link và mã QR của Lynhin's Hanoi Recommendations dùng đúng URL NextbyLocal người dùng cung cấp; thay `profile.hanoiRecommendationsUrl` để cập nhật cả hai.
+`profile.isPlaceholder` hiện là `false`. Mục Góc Du lịch / Văn hóa đã được bỏ; phần tìm hiểu các câu chuyện văn hóa được giữ trong Về tôi. Các mục được đánh số liên tục từ 01 đến 07. Link và mã QR của Lynhhin's Hanoi Recommendations dùng đúng URL NextbyLocal người dùng cung cấp; thay `profile.hanoiRecommendationsUrl` để cập nhật cả hai.
+
+Nút VI/EN trên thanh điều hướng đổi nội dung toàn trang, cửa sổ chi tiết dự án, chú thích ảnh và các nhãn hỗ trợ tiếp cận. Hai ngôn ngữ dùng chung component, ảnh, font, màu sắc, bố cục và hiệu ứng. Lựa chọn ngôn ngữ được lưu trong localStorage với khóa `lynhhin-language`, đồng bộ giữa các tab; tiếng Việt là mặc định. Thuộc tính `html.lang`, tiêu đề và mô tả trang được cập nhật theo ngôn ngữ hiển thị.
 
 ## Ảnh & CV
 
@@ -48,7 +51,7 @@ Thay file ảnh trong các thư mục tương ứng hoặc cập nhật `images.
 node --experimental-strip-types scripts/download-images.mjs
 ```
 
-Tài liệu nội dung không có CV thật. `profile.cv` hiện là `null`, nên các nút tải CV được ẩn hoặc chuyển thành nút liên hệ. Thêm CV thật vào `public/cv/` và đặt đường dẫn vào `profile.cv` để khôi phục tải CV. File CV mẫu cũ không được liên kết với hồ sơ Lynhin; script tạo CV mẫu cũng không chạy với hồ sơ thật.
+Tài liệu nội dung không có CV thật. `profile.cv` hiện là `null`, nên các nút tải CV được ẩn hoặc chuyển thành nút liên hệ. Thêm CV thật vào `public/cv/` và đặt đường dẫn vào `profile.cv` để khôi phục tải CV. File CV mẫu cũ không được liên kết với hồ sơ Lynhhin; script tạo CV mẫu cũng không chạy với hồ sơ thật.
 
 ## Animation & accessibility
 

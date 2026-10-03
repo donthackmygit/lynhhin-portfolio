@@ -1,6 +1,6 @@
 export const profile = {
   name: "Khuất Nguyễn Thảo Linh",
-  shortName: "Lynhin",
+  shortName: "Lynhhin",
   initials: "lh.",
   location: "Hà Nội, Việt Nam",
   email: "khuatlinh0601@gmail.com",
@@ -12,15 +12,13 @@ export const profile = {
     "https://nextbylocal.com/@lynhhinxinchao/lynhhin-hanoi-recomendation?utm_source=nextbylocal&utm_medium=network&utm_campaign=explore",
   isPlaceholder: false,
   availability: "Kết nối cho những cơ hội trong lĩnh vực du lịch",
-  disciplines: ["Tour guiding", "Culture", "Tour operations"],
+  disciplines: ["Tour guiding", "Culture", "History", "Việt Nam"],
   hero: {
-    eyebrow: "LYNHIN / TRAVEL & CULTURE",
+    eyebrow: "LYNHHIN / TRAVEL & CULTURE",
     greeting: "Xin chào, tôi là",
     firstLine: "Khuất Nguyễn",
     secondLine: "Thảo Linh.",
-    quote:
-      "I don't just want to show people Vietnam — I want to help them understand it.",
-    introduction: "Trên những chuyến đi, mọi người thường gọi tôi là Lynhin.",
+    quote: "Turning local stories into meaningful journeys",
     primaryCta: "Khám phá hành trình",
     secondaryCta: "Kết nối với tôi",
     imageLocation: "Hội An, Việt Nam",
@@ -31,10 +29,10 @@ export const profile = {
     eyebrow: "VỀ TÔI",
     title: "Không chỉ đi để thấy.",
     italicTitle: "Đi để hiểu và kết nối.",
-    lead: "Tôi yêu thích những hành trình giúp mình hiểu thêm về lịch sử, con người và văn hóa địa phương.",
+    lead: "Tôi yêu thích những hành trình giúp tôi hiểu thêm về lịch sử, con người và văn hóa địa phương.",
     paragraphs: [
-      "Xin chào, tôi là Khuất Nguyễn Thảo Linh — và trên những chuyến đi, mọi người thường gọi tôi là Lynhin. Với tôi, một chuyến đi đáng nhớ không chỉ nằm ở việc “đã đi đâu”, mà còn ở những câu chuyện, trải nghiệm và cảm xúc mà du khách mang về sau hành trình.",
-      "Tôi thích khám phá những điểm đến mới, đặc biệt là di tích lịch sử, văn hóa địa phương, phong tục và đời sống bản địa. Khi đến một nơi, tôi thường tò mò về câu chuyện phía sau địa danh đó: vì sao nơi ấy tồn tại, điều gì đã hình thành nên văn hóa nơi đây và đâu là những nét khiến vùng đất ấy trở nên khác biệt.",
+      "Xin chào, tôi là Khuất Nguyễn Thảo Linh. Với tôi, một chuyến đi đáng nhớ không chỉ nằm ở việc “đã đi đâu”, mà còn ở những câu chuyện, trải nghiệm và cảm xúc mà du khách mang về sau hành trình.",
+      "Tôi luôn có thói quen tìm hiểu những câu chuyện phía sau các địa danh, phong tục và nét văn hóa Việt Nam. Tôi thường tự hỏi vì sao một con phố có tên như vậy, một truyền thống bắt nguồn từ đâu hay điều gì đã hình thành nên cách sống của người Việt ngày nay. Chính sự tò mò đó khiến tôi chủ động đọc thêm về lịch sử, truyền thống và văn hóa Việt Nam, đồng thời học cách biến kiến thức thành những câu chuyện dễ hiểu và thú vị hơn đối với du khách.",
       "Tôi định hướng phát triển trong lĩnh vực hướng dẫn du lịch, thiết kế trải nghiệm văn hóa và vận hành tour, đặc biệt với các hành trình liên quan đến văn hóa, lịch sử và trải nghiệm địa phương. Tôi mong muốn được làm việc với cả khách Việt Nam và khách quốc tế, đồng thời từng bước phát triển khả năng kể chuyện và thiết kế những trải nghiệm du lịch có ý nghĩa.",
     ],
     interests: [
@@ -44,10 +42,13 @@ export const profile = {
       "Đời sống bản địa",
     ],
     imageCaption:
-      "Cảm hứng từ văn hóa Việt Nam · Ảnh minh họa, không phải chân dung Lynhin",
+      "Cảm hứng từ văn hóa Việt Nam · Ảnh minh họa, không phải chân dung Lynhhin",
     facts: [
-      { label: "CÒN ĐƯỢC GỌI LÀ", value: "Lynhin" },
-      { label: "XUẤT PHÁT ĐIỂM", value: "Sinh viên kinh tế" },
+      { label: "CÒN ĐƯỢC GỌI LÀ", value: "Lynhhin" },
+      {
+        label: "MỐI QUAN TÂM",
+        value: "Lịch sử · Con người · Văn hóa địa phương",
+      },
       {
         label: "ĐỊNH HƯỚNG",
         value: "Hướng dẫn du lịch · Trải nghiệm văn hóa · Vận hành tour",
@@ -61,11 +62,11 @@ export const profile = {
     description:
       "Quan tâm đến các cơ hội trong lĩnh vực hướng dẫn du lịch, trải nghiệm văn hóa, vận hành tour và sáng tạo nội dung du lịch.",
     cta: "Gửi email cho tôi",
-    mailSubject: "Kết nối cùng Lynhin - Cơ hội trong lĩnh vực du lịch",
+    mailSubject: "Kết nối cùng Lynhhin - Cơ hội trong lĩnh vực du lịch",
   },
   footer: {
     tagline: "Hiểu Việt Nam qua lịch sử, con người và văn hóa địa phương.",
-    note: "Khuất Nguyễn Thảo Linh · Lynhin",
+    note: "Khuất Nguyễn Thảo Linh · Lynhhin",
   },
 };
 
@@ -74,7 +75,6 @@ export const navigation = [
   { id: "ve-toi", label: "Về tôi" },
   { id: "hanh-trinh", label: "Trải nghiệm" },
   { id: "du-an", label: "Dự án" },
-  { id: "goc-du-lich", label: "Du lịch & Văn hóa" },
   { id: "lien-he", label: "Liên hệ" },
 ];
 
@@ -83,8 +83,6 @@ export const sectionCopy = {
     eyebrow: "KINH NGHIỆM & HOẠT ĐỘNG",
     title: "Những trải nghiệm,",
     italic: "những kết nối.",
-    description:
-      "Từ hỗ trợ tour thực tế đến đồng hành cùng sinh viên quốc tế tại Trường Đại học Ngoại thương.",
     note: "Tiếp tục học hỏi qua từng hành trình.",
   },
   projects: {
@@ -100,18 +98,6 @@ export const sectionCopy = {
     approachLabel: "Đóng góp trong dự án",
     deliverablesLabel: "Trải nghiệm & nội dung",
     takeawayLabel: "Điều tôi học được",
-  },
-  culture: {
-    eyebrow: "GÓC DU LỊCH / VĂN HÓA",
-    title: "Travel & Culture Lens.",
-    italic: "Góc nhìn của Lynhin.",
-    description:
-      "Tìm hiểu những câu chuyện phía sau địa danh, phong tục và nét văn hóa Việt Nam.",
-    introduction:
-      "Dẫu xuất phát điểm của tôi là một sinh viên kinh tế, tôi luôn có thói quen tìm hiểu những câu chuyện phía sau các địa danh, phong tục và nét văn hóa Việt Nam. Tôi thường tự hỏi vì sao một con phố có tên như vậy, một truyền thống bắt nguồn từ đâu hay điều gì đã hình thành nên cách sống của người Việt ngày nay. Chính sự tò mò đó khiến tôi chủ động đọc thêm về lịch sử, truyền thống và văn hóa Việt Nam, đồng thời học cách biến kiến thức thành những câu chuyện dễ hiểu và thú vị hơn đối với du khách.",
-    noteLabel: "CHỦ ĐỀ GỢI MỞ",
-    experienceLabel: "Những câu hỏi tôi muốn tìm hiểu",
-    detailLabel: "Khám phá góc nhìn",
   },
   skills: {
     eyebrow: "KỸ NĂNG",

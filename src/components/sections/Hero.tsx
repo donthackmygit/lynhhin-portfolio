@@ -9,8 +9,7 @@ import {
 } from "lucide-react";
 import { useRef } from "react";
 import type { gsap } from "gsap";
-import { profile } from "@/data/profile";
-import { images } from "@/data/images";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
 import { useScrollStory } from "@/hooks/useScrollStory";
 
@@ -45,6 +44,9 @@ function heroAnimation(root: HTMLElement, animation: typeof gsap) {
 }
 
 export function Hero() {
+  const {
+    content: { profile, images, ui },
+  } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   useScrollStory(ref, heroAnimation);
 
@@ -86,9 +88,6 @@ export function Hero() {
           <p className="hero-quote hero-support" lang="en">
             {profile.hero.quote}
           </p>
-          <p className="hero-introduction hero-support">
-            {profile.hero.introduction}
-          </p>
           <div className="hero-actions hero-support">
             <a className="button button-white" href="#hanh-trinh">
               {profile.hero.primaryCta}
@@ -100,7 +99,7 @@ export function Hero() {
               download={profile.cv ? true : undefined}
             >
               {profile.cv && <Download size={16} />}
-              {profile.cv ? "Tải CV" : profile.hero.secondaryCta}
+              {profile.cv ? ui.downloadCv : profile.hero.secondaryCta}
               <ArrowUpRight size={15} />
             </a>
           </div>
@@ -114,8 +113,8 @@ export function Hero() {
           <a
             href="#ve-toi"
             className="hero-scroll"
-            aria-label="Cuộn đến phần về tôi"
-            title="Về tôi"
+            aria-label={ui.scrollToAbout}
+            title={ui.about}
           >
             <ArrowDown size={20} />
           </a>

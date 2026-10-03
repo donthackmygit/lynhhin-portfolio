@@ -1,8 +1,12 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
-import { profile } from "@/data/profile";
-import { images } from "@/data/images";
+import { useLanguage } from "@/components/language/LanguageProvider";
 
 export function Footer() {
+  const {
+    content: { profile, images, ui },
+  } = useLanguage();
   const credits = Array.from(
     new Map(
       Object.values(images).map((image) => [image.source, image]),
@@ -19,7 +23,7 @@ export function Footer() {
           </a>
           <p>{profile.footer.tagline}</p>
           <a href="#trang-chu" className="text-link">
-            Về đầu trang
+            {ui.backToTop}
             <ArrowUpRight size={17} />
           </a>
         </div>
@@ -30,7 +34,7 @@ export function Footer() {
           <span>{profile.footer.note}</span>
         </div>
         <details className="photo-credits">
-          <summary>Nguồn ảnh</summary>
+          <summary>{ui.photoCredits}</summary>
           <div>
             {credits.map((image) => (
               <a

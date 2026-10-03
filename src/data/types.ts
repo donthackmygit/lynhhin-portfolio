@@ -10,11 +10,12 @@ export type JournalImage = {
 export type Experience = {
   id: string;
   period?: string;
-  year?: string;
+  year: string;
   category: string;
   title: string;
   organization: string;
   description: string;
+  details?: { title: string; description: string }[];
   highlights: string[];
 };
 
@@ -39,17 +40,4 @@ export type Project = {
   takeaway: string;
   takeawayLabel?: string;
   link?: { label: string; url: string | null };
-};
-
-export type CultureNote = {
-  id: string;
-  number: string;
-  name: string;
-  region: string;
-  title: string;
-  description: string;
-  tags: string[];
-  image: JournalImage;
-  note: string;
-  questions: string[];
 };

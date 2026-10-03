@@ -456,6 +456,79 @@ em {
 .desktop-nav a.is-active::after {
   transform: scaleX(1);
 }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.language-switcher {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  flex-shrink: 0;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--rule);
+  border-radius: 11px;
+  background: var(--white);
+  transition:
+    border-color 250ms,
+    box-shadow 250ms;
+}
+.language-switcher::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc((100% - 8px) / 2);
+  border-radius: 8px;
+  background: var(--red);
+  box-shadow: 0 2px 6px rgba(184, 64, 58, 0.16);
+  transform: translateX(0);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.language-switcher[data-locale="en"]::before {
+  transform: translateX(calc(100% + 2px));
+}
+.language-switcher:hover {
+  border-color: var(--soft-red);
+  box-shadow: 0 2px 8px rgba(37, 34, 31, 0.04);
+}
+.language-switcher button {
+  position: relative;
+  min-width: 34px;
+  min-height: 30px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--text-label);
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background 250ms,
+    color 250ms,
+    transform 180ms var(--ease);
+}
+.language-switcher button:hover:not([aria-pressed="true"]) {
+  background: var(--soft-cream);
+  color: var(--red);
+}
+.language-switcher button[aria-pressed="true"] {
+  color: var(--white);
+}
+.language-switcher button:active {
+  transform: scale(0.94);
+}
+.language-switcher button:focus-visible {
+  outline-offset: 2px;
+}
 .nav-cv {
   display: inline-flex;
   align-items: center;
@@ -791,16 +864,27 @@ em {
   font-size: var(--text-label);
 }
 .journey-timeline {
+  --timeline-label-width: 48px;
+  --timeline-label-gap: 14px;
+  --timeline-dot-size: 13px;
+  --timeline-content-gap: 24px;
+  --timeline-inset: calc(
+    var(--timeline-label-width) + var(--timeline-label-gap) +
+      var(--timeline-dot-size) + var(--timeline-content-gap)
+  );
   position: relative;
-  padding-left: 100px;
+  padding-left: var(--timeline-inset);
 }
 .timeline-track {
   position: absolute;
   width: 1px;
   background: var(--rule);
-  top: 9px;
+  top: 13px;
   bottom: 11px;
-  left: 30px;
+  left: calc(
+    var(--timeline-label-width) + var(--timeline-label-gap) +
+      var(--timeline-dot-size) / 2
+  );
 }
 .timeline-progress {
   position: absolute;
@@ -818,12 +902,12 @@ em {
 }
 .timeline-marker {
   position: absolute;
-  top: 1px;
-  left: -76px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 11px;
+  top: 0;
+  left: calc(0px - var(--timeline-inset));
+  display: grid;
+  grid-template-columns: var(--timeline-label-width) var(--timeline-dot-size);
+  align-items: center;
+  column-gap: var(--timeline-label-gap);
 }
 .timeline-item + .timeline-item .timeline-marker {
   top: 24px;
@@ -841,7 +925,35 @@ em {
   font-family: var(--font-lora), Georgia, serif;
   font-size: 18px;
   color: var(--muted);
-  margin-left: -13px;
+  margin-left: 0;
+  line-height: 1.4;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.timeline-activity + .timeline-activity {
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+}
+.timeline-detail {
+  margin-block: 20px;
+  padding: 18px 20px;
+  border-left: 2px solid var(--soft-red);
+  background: var(--soft-cream);
+}
+.timeline-detail h4 {
+  font-family: var(--font-be-vietnam), sans-serif;
+  font-size: var(--text-small);
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.timeline-detail p {
+  font-size: var(--text-body);
+  line-height: 1.95;
+  color: var(--muted);
 }
 .timeline-meta {
   display: flex;
@@ -853,7 +965,7 @@ em {
   color: var(--red);
   font-size: var(--text-label);
 }
-.timeline-meta time {
+.timeline-period {
   font-size: var(--text-label);
   color: var(--muted);
 }
@@ -886,7 +998,7 @@ em {
 }
 .timeline-next .timeline-dot {
   position: absolute;
-  left: -76px;
+  left: calc(0px - var(--timeline-content-gap) - var(--timeline-dot-size));
   height: 9px;
   width: 9px;
   margin-left: 2px;
@@ -1910,7 +2022,7 @@ em {
   .desktop-nav {
     display: none;
   }
-  .nav-cv {
+  .nav-actions {
     margin-left: auto;
   }
   .menu-toggle {
@@ -2018,16 +2130,9 @@ em {
     font-size: var(--text-body);
   }
   .journey-timeline {
-    padding-left: 80px;
-  }
-  .timeline-marker {
-    left: -66px;
-  }
-  .timeline-track {
-    left: 20px;
-  }
-  .timeline-next .timeline-dot {
-    left: -66px;
+    --timeline-label-width: 44px;
+    --timeline-label-gap: 12px;
+    --timeline-content-gap: 22px;
   }
   .timeline-content h3 {
     font-size: 20px;
@@ -2035,7 +2140,7 @@ em {
   .timeline-meta {
     align-items: flex-start;
   }
-  .timeline-meta time {
+  .timeline-period {
     text-align: right;
   }
   .project-row {
@@ -2155,6 +2260,9 @@ em {
   }
   .nav-container {
     gap: 16px;
+  }
+  .nav-actions {
+    gap: 10px;
   }
   .brand-monogram {
     font-size: 35px;
@@ -2339,20 +2447,15 @@ em {
     display: none;
   }
   .journey-timeline {
-    padding-left: 57px;
-  }
-  .timeline-track {
-    left: 6px;
-  }
-  .timeline-marker {
-    left: -57px;
+    --timeline-label-width: 36px;
+    --timeline-label-gap: 10px;
+    --timeline-content-gap: 18px;
   }
   .timeline-dot {
     width: 13px;
     height: 13px;
   }
   .timeline-year {
-    margin-left: -3px;
     font-size: 15px;
   }
   .timeline-content h3 {
@@ -2367,11 +2470,18 @@ em {
   .timeline-meta .eyebrow {
     font-size: var(--text-label);
   }
-  .timeline-meta time {
+  .timeline-period {
     font-size: var(--text-label);
   }
   .timeline-item {
     padding-bottom: 32px;
+  }
+  .timeline-activity + .timeline-activity {
+    margin-top: 25px;
+    padding-top: 23px;
+  }
+  .timeline-detail {
+    padding: 15px;
   }
   .timeline-item + .timeline-item .timeline-content {
     padding-top: 23px;
@@ -2386,9 +2496,6 @@ em {
   .timeline-next {
     font-size: var(--text-small);
     gap: 7px;
-  }
-  .timeline-next .timeline-dot {
-    left: -57px;
   }
   .project-list {
     margin-top: 42px;
@@ -2700,9 +2807,11 @@ em {
 
 @media (max-width: 575px) {
   .nav-cv {
-    width: 44px;
-    height: 44px;
-    padding: 0;
+    display: none;
+  }
+  .language-switcher button {
+    min-height: 44px;
+    min-width: 32px;
   }
   .nav-cv span {
     display: none;

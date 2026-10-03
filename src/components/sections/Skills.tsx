@@ -1,6 +1,7 @@
+"use client";
+
 import { Compass, Languages, MessagesSquare, PenTool } from "lucide-react";
-import { skillGroups } from "@/data/skills";
-import { sectionCopy } from "@/data/profile";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal, Stagger } from "@/components/ui/Reveal";
 
@@ -12,6 +13,9 @@ const icons = {
 };
 
 export function Skills() {
+  const {
+    content: { skillGroups, sectionCopy },
+  } = useLanguage();
   const copy = sectionCopy.skills;
   return (
     <section
@@ -21,7 +25,7 @@ export function Skills() {
     >
       <div className="container">
         <SectionHeading
-          number="05"
+          number="04"
           eyebrow={copy.eyebrow}
           title={copy.title}
           italic={copy.italic}
