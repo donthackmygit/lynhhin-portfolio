@@ -14,8 +14,8 @@ type TravelIntroProps = {
   onComplete: () => void;
 };
 
-const COVER_TIME = 3.5;
-const END_TIME = 4.2;
+const COVER_TIME = 4.2;
+const END_TIME = 5;
 
 export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
   const {
@@ -74,7 +74,7 @@ export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
     // A failed chunk or stalled animation must never block the portfolio.
     fallbackTimer = setTimeout(
       finish,
-      Math.max(0, 4600 - (performance.now() - startedAt)),
+      Math.max(0, END_TIME * 1000 + 400 - (performance.now() - startedAt)),
     );
     const onPreferenceChange = () => {
       if (preference.matches) finish();
@@ -184,7 +184,7 @@ export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
               );
               if (!plane) return;
               const departure = 0.5 + index * 0.08;
-              const duration = 2.12;
+              const duration = 2.8;
               const firstPoint = path.getPointAtLength(0);
               const nextPoint = path.getPointAtLength(1);
               const rotation =
@@ -227,12 +227,12 @@ export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
             .to(
               map.querySelector(".intro-target-marker"),
               { scale: 1, duration: 0.3, ease: "power2.out" },
-              2.45,
+              3.15,
             )
             .to(
               map.querySelector(".intro-target-label"),
               { opacity: 1, y: 0, duration: 0.3 },
-              2.55,
+              3.25,
             )
             .fromTo(
               map.querySelector(".intro-target-pulse"),
@@ -244,7 +244,7 @@ export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
                 ease: "power1.out",
                 immediateRender: false,
               },
-              2.6,
+              3.3,
             )
             .fromTo(
               map.querySelector(".intro-target-pulse-second"),
@@ -256,15 +256,15 @@ export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
                 ease: "power1.out",
                 immediateRender: false,
               },
-              2.85,
+              3.55,
             )
-            .to(title, { opacity: 0, y: -8, duration: 0.3 }, 2.85);
+            .to(title, { opacity: 0, y: -8, duration: 0.3 }, 3.55);
 
           for (const cloud of clouds) {
             timeline.to(
               cloud.element,
               { xPercent: 0, yPercent: 0, duration: 0.6 },
-              2.9,
+              3.6,
             );
           }
 

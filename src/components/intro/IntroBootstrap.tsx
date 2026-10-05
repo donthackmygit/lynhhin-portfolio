@@ -14,7 +14,7 @@ export function IntroBootstrap() {
           style.dataset.startedAt=String(performance.now());
           style.textContent='.travel-intro{display:block}body{overflow:hidden}html{scrollbar-gutter:stable}';
           document.head.appendChild(style);
-          window.setTimeout(function(){style.remove();},5000);
+          window.setTimeout(function(){style.remove();},6000);
         })();`,
       }}
     />

@@ -48,7 +48,7 @@ Timeline hỗ trợ trường `month` từ 1 đến 12 trong `src/data/experienc
 Ảnh và CV dùng trên website được lưu tại `public/images/` và `public/documents/`:
 
 - `public/images/hero/carousel/`: 15 ảnh Hà Nội. `heroCarousel` trong `images.ts` quy định thứ tự, kích thước và alt text; bản tiếng Anh đổi alt text trong `english.ts`. Carousel tự chuyển sau 3 giây, từ ảnh cuối quay về ảnh đầu; hai nút ở hai cạnh cho phép chuyển thủ công.
-- `public/images/about/newer.jpg`: ảnh Về tôi, có hiệu ứng hover và cửa sổ xem ảnh gốc trên nền đen.
+- `public/images/about/newer.jpg`: ảnh Về tôi, có bóng hồng, hiệu ứng hover và cửa sổ xem ảnh gốc trên nền đen.
 - `public/images/projects/`: ảnh thẻ dự án và ảnh cửa sổ chi tiết. `image` và `modalImage` trong `projects.ts` chọn ảnh cho từng vị trí; `englishProjects` chọn cùng ảnh với alt text tiếng Anh. Khung ảnh modal giữ đúng tỉ lệ gốc để không tạo khoảng trống.
 - `public/documents/Khuat-Nguyen-Thao-Linh-CV.pdf`: CV thật, liên kết qua `profile.cv`. Nút tải CV nằm cạnh nút gửi email ở phần Liên hệ. Có thể đặt `profile.cv` thành `null` để ẩn nút khi chưa có CV.
 
@@ -59,13 +59,14 @@ Khi thay ảnh, cập nhật đường dẫn và kích thước thực tế tron
 - GSAP được tải động, quản lý hero, tiến độ timeline và parallax nhẹ trên desktop.
 - GSAP matchMedia tự cleanup khi unmount, đổi breakpoint hoặc đổi cài đặt reduced motion.
 - Motion phụ trách reveal section, mobile menu và dialog.
-- Intro du lịch dài khoảng 4,2 giây: bản đồ thế giới → các đường bay hội tụ về Việt Nam → hai pulse nhẹ → mây phủ và tan để lộ Hero. Desktop có 5 chuyến bay; mobile dùng khung bản đồ tập trung vào châu Á với 3 chuyến bay và icon lớn hơn.
+- Intro du lịch dài 5 giây: bản đồ thế giới → các đường bay hội tụ về Việt Nam → hai pulse nhẹ → mây phủ và tan để lộ Hero. Desktop có 5 chuyến bay; mobile dùng khung bản đồ tập trung vào châu Á với 3 chuyến bay và icon lớn hơn.
 - Intro chỉ chạy một lần trong mỗi tab session, lưu `portfolio-intro-seen` trong sessionStorage khi hoàn tất hoặc bấm **Skip intro →**. Refresh cùng session vào thẳng portfolio. Có thể xóa key này trong DevTools để xem lại intro.
 - Portfolio và ảnh Hero được render từ đầu phía sau overlay. Hero bắt đầu animation khi mây phủ kín; intro cleanup GSAP, khôi phục cuộn và tương tác khi kết thúc. Nút Skip dùng được với bàn phím; Escape cũng bỏ qua intro. Reduced motion bỏ qua intro hoàn toàn.
 - Các component intro nằm trong `src/components/intro/`; bản đồ SVG nhẹ nằm tại `public/maps/world-map.svg`, dùng dữ liệu Natural Earth public domain. Nguồn và license được ghi trong `public/maps/SOURCES.md`.
 - Link nội bộ sang trang khác được phủ màn chuyển cảnh trước khi Next.js đổi route. Anchor trong cùng trang vẫn cuộn mượt; tải CV, email, điện thoại và link mở tab mới không bị chặn.
 - Reveal trượt lên 30px trong 0,65 giây; các nhóm nội dung xuất hiện so le theo nhịp 0,1 giây. Hover phóng ảnh 1,05 lần, nâng tiêu đề/icon 4px và đổi viền nhẹ.
-- Nút Liên hệ, gửi email và tải CV có viền hồng và quầng sáng nhẹ khi hover hoặc focus bằng bàn phím, thông qua class `button-glow`. Các liên kết chữ giữ hiệu ứng gạch chân ban đầu. Màu và độ sáng được quản lý bằng `--button-hover-shadow` trong `globals.css`.
+- Ảnh Về tôi và ảnh thẻ dự án có bóng hồng rõ, tăng độ sáng khi hover hoặc focus bằng bàn phím. Bóng hiện sẵn cả trên thiết bị cảm ứng, quản lý bằng `--photo-shadow` và `--photo-hover-shadow` trong `globals.css`.
+- Nút Liên hệ, gửi email và tải CV có bóng đỏ nhạt theo màu chủ đạo, tăng quầng sáng khi hover hoặc focus bằng bàn phím, thông qua class `button-glow`. Các liên kết chữ giữ hiệu ứng gạch chân ban đầu. Màu và độ sáng được quản lý bằng `--button-shadow` và `--button-hover-shadow` trong `globals.css`.
 - Chữ nội dung dùng 17px, chữ phụ 14px và nhãn 12px; bố cục mobile tự nới theo nội dung, không ép chiều cao làm cắt chữ.
 - `prefers-reduced-motion` tắt scrub, parallax và giảm chuyển động; nội dung vẫn hiển thị đầy đủ.
 - Menu và dialog có Escape, focus trap, phục hồi focus và khóa tương tác nội dung nền.

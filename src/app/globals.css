@@ -36,8 +36,18 @@
   --text-small: 14px;
   --text-label: 12px;
   --ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --photo-shadow:
+    0 10px 26px -4px rgba(219, 101, 144, 0.32),
+    0 0 22px 3px rgba(228, 135, 167, 0.26);
+  --photo-hover-shadow:
+    0 20px 40px -6px rgba(219, 101, 144, 0.42),
+    0 0 30px 5px rgba(228, 135, 167, 0.36);
+  --button-shadow:
+    0 5px 14px color-mix(in srgb, var(--red) 22%, transparent),
+    0 0 14px 2px color-mix(in srgb, var(--red) 14%, transparent);
   --button-hover-shadow:
-    0 0 0 1px rgba(228, 135, 167, 0.38), 0 0 18px 3px rgba(228, 135, 167, 0.18);
+    0 10px 24px color-mix(in srgb, var(--red) 30%, transparent),
+    0 0 22px 4px color-mix(in srgb, var(--red) 24%, transparent);
   color-scheme: light;
 }
 
@@ -838,12 +848,10 @@ em {
   padding: 0;
   border-radius: 210px 210px 3px 3px;
   cursor: zoom-in;
+  box-shadow: var(--photo-shadow);
   transition:
     transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 350ms var(--ease);
-}
-.about-photo-button:focus-visible {
-  box-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
 }
 .about-photo {
   aspect-ratio: 0.89;
@@ -1138,6 +1146,7 @@ em {
   padding: 0;
   width: 100%;
   overflow: hidden;
+  box-shadow: var(--photo-shadow);
   transition: box-shadow 350ms var(--ease);
 }
 .project-photo {
@@ -1787,13 +1796,9 @@ em {
   .about-photo-button:hover,
   .about-photo-button:focus-visible {
     transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
   }
   .project-row:is(:hover, :focus-within) .project-photo img {
     scale: 1.05;
-  }
-  .project-row:is(:hover, :focus-within) .project-image-button {
-    box-shadow: 0 12px 26px rgba(37, 34, 31, 0.1);
   }
   .project-row:is(:hover, :focus-within) .project-copy h3,
   .skill-group:hover h3,
@@ -1814,12 +1819,26 @@ em {
   }
 }
 
-/* Contact actions opt in to the soft edge glow. */
+/* Photos and contact actions keep a visible shadow on touch screens too. */
+.about-photo-button:focus-visible,
+.project-row:focus-within .project-image-button {
+  box-shadow: var(--photo-hover-shadow);
+}
+
+.button-glow:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(--button-shadow);
+}
+
 .button-glow:not(:disabled):not([aria-disabled="true"]):focus-visible {
   box-shadow: var(--button-hover-shadow);
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .about-photo-button:hover,
+  .project-row:hover .project-image-button {
+    box-shadow: var(--photo-hover-shadow);
+  }
+
   .button-glow:not(:disabled):not([aria-disabled="true"]):hover {
     box-shadow: var(--button-hover-shadow);
   }
