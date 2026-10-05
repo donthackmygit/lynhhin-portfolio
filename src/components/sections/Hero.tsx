@@ -120,7 +120,10 @@ export function Hero() {
                 image={image}
                 className="hero-slide-photo"
                 sizes="100vw"
-                priority={index === 0}
+                loading={
+                  index === 0 || index === activeSlide ? "eager" : "lazy"
+                }
+                fetchPriority={index === 0 ? "high" : "auto"}
                 quality={85}
               />
             </div>

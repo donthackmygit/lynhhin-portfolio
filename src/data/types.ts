@@ -2,11 +2,8 @@ export type JournalImage = {
   src: string;
   alt: string;
   position?: string;
-  width?: number;
-  height?: number;
-  credit: string;
-  source: string;
-  downloadUrl: string;
+  width: number;
+  height: number;
 };
 
 export type CalendarMonth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
@@ -32,7 +29,7 @@ export type Project = {
   description: string;
   image: JournalImage;
   modalImage?: JournalImage;
-  imageCaption?: string;
+  imageCaption: string;
   year?: string;
   month?: CalendarMonth;
   category: string;
@@ -43,7 +40,6 @@ export type Project = {
   skills: string[];
   brief: string;
   challenge?: string;
-  approach: string[];
   deliverables: string[];
   takeaway: string;
   takeawayLabel?: string;

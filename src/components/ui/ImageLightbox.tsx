@@ -11,8 +11,7 @@ type ImageLightboxProps = {
 };
 
 export function ImageLightbox({ image, open, onClose }: ImageLightboxProps) {
-  const width = image.width ?? 1920;
-  const height = image.height ?? 1280;
+  const { width, height } = image;
   return (
     <Dialog open={open} onClose={onClose} title={image.alt} variant="image">
       <Image

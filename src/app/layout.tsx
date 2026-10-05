@@ -51,7 +51,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  robots: { index: !profile.isPlaceholder, follow: !profile.isPlaceholder },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {

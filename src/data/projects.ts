@@ -14,6 +14,7 @@ export const projects: Project[] = [
     description:
       "Một chương trình tour văn hóa hoàn toàn miễn phí dành cho 40 sinh viên quốc tế đến từ 10 quốc gia, được tổ chức đúng dịp kỷ niệm 80 năm Quốc khánh Việt Nam.",
     image: images.project,
+    modalImage: images.projectModal,
     imageCaption: "Hà Nội · Khoảnh khắc từ hành trình văn hóa",
     category: "DỰ ÁN NỔI BẬT",
     badge: "Onetrip with Local",
@@ -30,7 +31,6 @@ export const projects: Project[] = [
       "Một chương trình tour văn hóa hoàn toàn miễn phí dành cho 40 sinh viên quốc tế đến từ 10 quốc gia, được tổ chức đúng dịp kỷ niệm 80 năm Quốc khánh Việt Nam. Dự án hướng tới việc giới thiệu lịch sử, văn hóa và con người Việt Nam tới bạn bè quốc tế thông qua một trải nghiệm thực tế, gần gũi và đáng nhớ.",
     challenge:
       "Tour diễn ra trong điều kiện mưa bão và lịch cấm đường phục vụ sơ duyệt diễu binh có nhiều thay đổi. Đội ngũ phải linh hoạt điều chỉnh lịch trình và phối hợp tại hiện trường để đảm bảo trải nghiệm của sinh viên vẫn diễn ra trọn vẹn.",
-    approach: [],
     deliverables: [],
     takeaway:
       "Tôi nhận ra rằng một tour tốt không chỉ phụ thuộc vào kiến thức về điểm đến, mà còn đòi hỏi khả năng thích ứng, giao tiếp, làm việc nhóm, quan sát khách và xử lý những thay đổi ngoài kế hoạch.",
@@ -55,7 +55,6 @@ export const projects: Project[] = [
     ],
     brief:
       "Một danh sách gợi ý trải nghiệm Hà Nội dành cho du khách, được tôi tổng hợp từ góc nhìn của một người địa phương, tập trung vào văn hóa, ẩm thực và những trải nghiệm mang dấu ấn bản địa. Tôi mong muốn giúp du khách không chỉ “check-in” tại các địa điểm nổi tiếng mà còn khám phá Hà Nội theo cách gần gũi và chân thực hơn.",
-    approach: [],
     deliverables: [
       "Văn hóa Hà Nội",
       "Ẩm thực địa phương",

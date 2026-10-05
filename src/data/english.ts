@@ -24,6 +24,10 @@ export const englishImages = {
     ...images.project,
     alt: "Sharing a moment with international students on a cultural tour of Vietnam",
   },
+  projectModal: {
+    ...images.projectModal,
+    alt: "International students on a cultural tour of Hanoi on a rainy day",
+  },
   recommendations: {
     ...images.recommendations,
     alt: "Lynhhin's Hanoi food and local experience recommendations",
@@ -31,22 +35,6 @@ export const englishImages = {
   recommendationModal: {
     ...images.recommendationModal,
     alt: "Landscape illustration of Lynhhin's Hanoi food and local experience recommendations",
-  },
-  hanoi: {
-    ...images.hanoi,
-    alt: "Everyday life in Hanoi, with red flags and local shops lining the street",
-  },
-  hue: {
-    ...images.hue,
-    alt: "The architecture of Hue's Imperial City beside the water under a clear sky",
-  },
-  hoiAn: {
-    ...images.hoiAn,
-    alt: "Historic houses and the river in Hoi An in the late afternoon light",
-  },
-  ninhBinh: {
-    ...images.ninhBinh,
-    alt: "A river winding between limestone mountains and fields in Tam Coc, Ninh Binh",
   },
 } satisfies typeof images;
 
@@ -136,7 +124,6 @@ export const englishSectionCopy = {
     briefLabel: "Project overview",
     roleLabel: "My role and experience",
     challengeLabel: "The challenge",
-    approachLabel: "My contribution",
     deliverablesLabel: "Experiences & content",
     takeawayLabel: "What I learned",
   },
@@ -245,7 +232,6 @@ type ProjectTranslation = Pick<
   | "skills"
   | "brief"
   | "challenge"
-  | "approach"
   | "deliverables"
   | "takeaway"
   | "takeawayLabel"
@@ -274,7 +260,6 @@ const projectTranslations: Record<string, ProjectTranslation> = {
       "A completely free cultural tour for 40 international students from 10 countries, organised to mark the 80th anniversary of Vietnam's National Day. The project introduced Vietnam's history, culture and people to international friends through a hands-on, welcoming and memorable experience.",
     challenge:
       "The tour took place during stormy weather and changing road closures for military parade rehearsals. The team had to adapt the itinerary and coordinate on site to ensure the students could still enjoy the full experience.",
-    approach: [],
     deliverables: [],
     takeaway:
       "I learned that a good tour requires more than destination knowledge. It also calls for adaptability, communication, teamwork, attentiveness to visitors and the ability to handle unexpected changes.",
@@ -294,7 +279,6 @@ const projectTranslations: Record<string, ProjectTranslation> = {
     ],
     brief:
       "A collection of Hanoi recommendations that I curated from a local's perspective, focused on culture, food and experiences rooted in local life. I hope to help visitors go beyond checking in at famous landmarks and discover Hanoi in a more personal and authentic way.",
-    approach: [],
     deliverables: [
       "Hanoi culture",
       "Local food",
@@ -318,7 +302,9 @@ export const englishProjects: Project[] = projects.map((project) => ({
       ? englishImages.project
       : englishImages.recommendations,
   modalImage: project.modalImage
-    ? englishImages.recommendationModal
+    ? project.id === "discover-vietnam-on-us"
+      ? englishImages.projectModal
+      : englishImages.recommendationModal
     : undefined,
 }));
 

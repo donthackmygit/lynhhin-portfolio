@@ -106,7 +106,7 @@ export function Navbar() {
           <LanguageSwitcher />
           <a
             href="#lien-he"
-            className="nav-cv"
+            className="nav-contact"
             aria-label={ui.contactName}
             title={ui.contactName}
             aria-current={activeSection === "lien-he" ? "location" : undefined}

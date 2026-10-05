@@ -49,17 +49,13 @@ export function Projects() {
                   <JournalPhoto
                     image={project.image}
                     className="project-photo"
-                    aspectRatio={
-                      project.image.width && project.image.height
-                        ? project.image.width / project.image.height
-                        : undefined
-                    }
+                    aspectRatio={project.image.width / project.image.height}
                   />
                   <span className="project-image-index">
                     {ui.projectLabel} / {project.number}
                   </span>
                   <span className="project-image-caption">
-                    {project.imageCaption ?? ui.projectImageCaption}
+                    {project.imageCaption}
                   </span>
                   <span className="project-image-open">
                     <Plus size={22} />
@@ -124,20 +120,15 @@ export function Projects() {
         open={Boolean(selected)}
         onClose={() => setSelectedId(null)}
         title={selected?.title ?? ui.projectDetails}
-        className="project-dialog"
       >
         {selected && selectedImage && (
           <>
             <JournalPhoto
               image={selectedImage}
-              className="dialog-photo"
               sizes="(max-width: 767px) 95vw, 820px"
               fit="contain"
-              aspectRatio={
-                selectedImage.width && selectedImage.height
-                  ? selectedImage.width / selectedImage.height
-                  : undefined
-              }
+              quality={85}
+              aspectRatio={selectedImage.width / selectedImage.height}
             />
             <div className="dialog-content">
               <div className="dialog-eyebrow">
@@ -154,7 +145,7 @@ export function Projects() {
                   )}
                 </span>
                 {selected.badge && (
-                  <span className="sample-badge">{selected.badge}</span>
+                  <span className="project-badge">{selected.badge}</span>
                 )}
               </div>
               <h3>{selected.title}</h3>
@@ -177,19 +168,6 @@ export function Projects() {
                 <section>
                   <h4>{copy.challengeLabel}</h4>
                   <p>{selected.challenge}</p>
-                </section>
-              )}
-              {selected.approach.length > 0 && (
-                <section>
-                  <h4>{copy.approachLabel}</h4>
-                  <ol className="dialog-steps">
-                    {selected.approach.map((step, index) => (
-                      <li key={step}>
-                        <span>0{index + 1}</span>
-                        <p>{step}</p>
-                      </li>
-                    ))}
-                  </ol>
                 </section>
               )}
               {selected.deliverables.length > 0 && (

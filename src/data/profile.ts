@@ -5,12 +5,10 @@ export const profile = {
   location: "Hà Nội, Việt Nam",
   email: "khuatlinh0601@gmail.com",
   phone: "+84 902 025 828",
-  phoneHref: "+84902025828",
   whatsapp: "https://wa.me/84902025828",
   cv: "/documents/Khuat-Nguyen-Thao-Linh-CV.pdf" as string | null,
   hanoiRecommendationsUrl:
     "https://nextbylocal.com/@lynhhinxinchao/lynhhin-hanoi-recomendation?utm_source=nextbylocal&utm_medium=network&utm_campaign=explore",
-  isPlaceholder: false,
   availability: "Kết nối cho những cơ hội trong lĩnh vực du lịch",
   disciplines: ["Hướng dẫn du lịch", "Văn hóa", "Lịch sử", "Việt Nam"],
   hero: {
@@ -93,7 +91,6 @@ export const sectionCopy = {
     briefLabel: "Tổng quan dự án",
     roleLabel: "Vai trò và trải nghiệm",
     challengeLabel: "Thách thức",
-    approachLabel: "Đóng góp trong dự án",
     deliverablesLabel: "Trải nghiệm & nội dung",
     takeawayLabel: "Điều tôi học được",
   },
