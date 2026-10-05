@@ -234,9 +234,7 @@
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
-  transition:
-    color 180ms ease,
-    box-shadow 250ms var(--ease);
+  transition: color 180ms ease;
 }
 
 .intro-skip:hover {

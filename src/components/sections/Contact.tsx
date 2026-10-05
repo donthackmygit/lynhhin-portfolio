@@ -41,7 +41,7 @@ export function Contact() {
             <Reveal delay={0.12} className="contact-actions">
               <a
                 href={`mailto:${profile.email}?subject=${encodeURIComponent(copy.mailSubject)}`}
-                className="button button-primary contact-cta"
+                className="button button-primary contact-cta button-glow"
               >
                 <Mail size={18} />
                 {copy.cta}
@@ -51,7 +51,7 @@ export function Contact() {
                 <a
                   href={profile.cv}
                   download="Khuat-Nguyen-Thao-Linh-CV.pdf"
-                  className="button contact-cv"
+                  className="button contact-cv button-glow"
                 >
                   <Download size={18} />
                   {ui.downloadCv}

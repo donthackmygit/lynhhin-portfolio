@@ -65,7 +65,7 @@ Khi thay ảnh, cập nhật đường dẫn và kích thước thực tế tron
 - Các component intro nằm trong `src/components/intro/`; bản đồ SVG nhẹ nằm tại `public/maps/world-map.svg`, dùng dữ liệu Natural Earth public domain. Nguồn và license được ghi trong `public/maps/SOURCES.md`.
 - Link nội bộ sang trang khác được phủ màn chuyển cảnh trước khi Next.js đổi route. Anchor trong cùng trang vẫn cuộn mượt; tải CV, email, điện thoại và link mở tab mới không bị chặn.
 - Reveal trượt lên 30px trong 0,65 giây; các nhóm nội dung xuất hiện so le theo nhịp 0,1 giây. Hover phóng ảnh 1,05 lần, nâng tiêu đề/icon 4px và đổi viền nhẹ.
-- Các nút và điều hướng có viền hồng và quầng sáng nhẹ khi hover hoặc focus bằng bàn phím; màu và độ sáng được quản lý bằng `--button-hover-shadow` trong `globals.css`.
+- Nút Liên hệ, gửi email và tải CV có viền hồng và quầng sáng nhẹ khi hover hoặc focus bằng bàn phím, thông qua class `button-glow`. Các liên kết chữ giữ hiệu ứng gạch chân ban đầu. Màu và độ sáng được quản lý bằng `--button-hover-shadow` trong `globals.css`.
 - Chữ nội dung dùng 17px, chữ phụ 14px và nhãn 12px; bố cục mobile tự nới theo nội dung, không ép chiều cao làm cắt chữ.
 - `prefers-reduced-motion` tắt scrub, parallax và giảm chuyển động; nội dung vẫn hiển thị đầy đủ.
 - Menu và dialog có Escape, focus trap, phục hồi focus và khóa tương tác nội dung nền.

@@ -71,7 +71,6 @@ button {
   font: inherit;
   color: inherit;
   cursor: pointer;
-  transition: box-shadow 250ms var(--ease);
 }
 button:disabled {
   cursor: default;
@@ -265,7 +264,6 @@ em {
   font-weight: 500;
   line-height: 1.5;
   position: relative;
-  transition: box-shadow 250ms var(--ease);
 }
 .text-link::after {
   content: "";
@@ -292,8 +290,7 @@ em {
   border-radius: 3px;
   transition:
     background 200ms,
-    color 200ms,
-    box-shadow 250ms var(--ease);
+    color 200ms;
 }
 .icon-button:hover {
   background: var(--cream);
@@ -439,9 +436,7 @@ em {
   position: relative;
   font-size: var(--text-small);
   padding-block: 16px;
-  transition:
-    color 200ms,
-    box-shadow 250ms var(--ease);
+  transition: color 200ms;
 }
 .desktop-nav a::after {
   content: "";
@@ -505,7 +500,7 @@ em {
 }
 .language-switcher:hover {
   border-color: var(--soft-red);
-  box-shadow: var(--button-hover-shadow);
+  box-shadow: 0 2px 8px rgba(37, 34, 31, 0.04);
 }
 .language-switcher button {
   position: relative;
@@ -521,7 +516,6 @@ em {
   transition:
     background 250ms,
     color 250ms,
-    box-shadow 250ms var(--ease),
     transform 180ms var(--ease);
 }
 .language-switcher button:hover:not([aria-pressed="true"]) {
@@ -692,9 +686,7 @@ em {
   min-height: 44px;
   font-size: var(--text-action);
   border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-  transition:
-    color 200ms,
-    box-shadow 250ms var(--ease);
+  transition: color 200ms;
 }
 .hero-cv:hover {
   color: var(--cream);
@@ -739,7 +731,6 @@ em {
   transition:
     background 200ms,
     border-color 200ms,
-    box-shadow 250ms var(--ease),
     transform 200ms var(--ease);
 }
 .hero-carousel-button:hover,
@@ -784,9 +775,7 @@ em {
   width: 44px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  transition:
-    background 200ms,
-    box-shadow 250ms var(--ease);
+  transition: background 200ms;
 }
 .hero-scroll:hover {
   background: rgba(255, 255, 255, 0.18);
@@ -844,7 +833,6 @@ em {
   padding-right: 35px;
 }
 .about-photo-button {
-  --button-elevation-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
   display: block;
   width: 100%;
   padding: 0;
@@ -853,6 +841,9 @@ em {
   transition:
     transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 350ms var(--ease);
+}
+.about-photo-button:focus-visible {
+  box-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
 }
 .about-photo {
   aspect-ratio: 0.89;
@@ -1142,7 +1133,6 @@ em {
   order: 1;
 }
 .project-image-button {
-  --button-elevation-shadow: 0 12px 26px rgba(37, 34, 31, 0.1);
   display: block;
   position: relative;
   padding: 0;
@@ -1614,7 +1604,6 @@ em {
   font-size: var(--text-label);
 }
 .scroll-top {
-  --button-elevation-shadow: 0 3px 15px rgba(37, 34, 31, 0.05);
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -1798,6 +1787,7 @@ em {
   .about-photo-button:hover,
   .about-photo-button:focus-visible {
     transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
   }
   .project-row:is(:hover, :focus-within) .project-photo img {
     scale: 1.05;
@@ -1824,38 +1814,14 @@ em {
   }
 }
 
-/* A shared edge glow for buttons and navigation controls. */
-:is(
-    button,
-    a.button,
-    a.icon-button,
-    a.text-link,
-    a.nav-contact,
-    a.hero-cv,
-    a.hero-scroll,
-    .desktop-nav a,
-    .mobile-menu nav a
-  ):not(:disabled):not([aria-disabled="true"]):focus-visible {
-  box-shadow:
-    var(--button-hover-shadow),
-    var(--button-elevation-shadow, 0 0 0 transparent);
+/* Contact actions opt in to the soft edge glow. */
+.button-glow:not(:disabled):not([aria-disabled="true"]):focus-visible {
+  box-shadow: var(--button-hover-shadow);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  :is(
-      button,
-      a.button,
-      a.icon-button,
-      a.text-link,
-      a.nav-contact,
-      a.hero-cv,
-      a.hero-scroll,
-      .desktop-nav a,
-      .mobile-menu nav a
-    ):not(:disabled):not([aria-disabled="true"]):hover {
-    box-shadow:
-      var(--button-hover-shadow),
-      var(--button-elevation-shadow, 0 0 0 transparent);
+  .button-glow:not(:disabled):not([aria-disabled="true"]):hover {
+    box-shadow: var(--button-hover-shadow);
   }
 }
 
@@ -1986,9 +1952,6 @@ em {
     gap: 20px;
     padding-block: 15px;
     border-bottom: 1px solid var(--rule);
-    transition:
-      color 200ms,
-      box-shadow 250ms var(--ease);
     font-family: var(--font-lora), Georgia, serif;
     font-size: 26px;
   }

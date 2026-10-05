@@ -106,7 +106,7 @@ export function Navbar() {
           <LanguageSwitcher />
           <a
             href="#lien-he"
-            className="nav-contact"
+            className="nav-contact button-glow"
             aria-label={ui.contactName}
             title={ui.contactName}
             aria-current={activeSection === "lien-he" ? "location" : undefined}
@@ -162,7 +162,7 @@ export function Navbar() {
             </nav>
             <a
               href="#lien-he"
-              className="button button-primary"
+              className="button button-primary button-glow"
               onClick={() => setMenuOpen(false)}
             >
               <ArrowUpRight size={19} />
