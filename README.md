@@ -47,8 +47,8 @@ Timeline hỗ trợ trường `month` từ 1 đến 12 trong `src/data/experienc
 
 Ảnh và CV dùng trên website được lưu tại `public/images/` và `public/documents/`:
 
-- `public/images/hero/carousel/`: 15 ảnh Hà Nội. `heroCarousel` trong `images.ts` quy định thứ tự, kích thước và alt text; bản tiếng Anh đổi alt text trong `english.ts`. Carousel tự chuyển sau 6 giây, từ ảnh cuối quay về ảnh đầu; hai nút ở hai cạnh cho phép chuyển thủ công.
-- `public/images/about/new.jpg`: ảnh Về tôi, có hiệu ứng hover và cửa sổ xem ảnh gốc trên nền đen.
+- `public/images/hero/carousel/`: 15 ảnh Hà Nội. `heroCarousel` trong `images.ts` quy định thứ tự, kích thước và alt text; bản tiếng Anh đổi alt text trong `english.ts`. Carousel tự chuyển sau 3 giây, từ ảnh cuối quay về ảnh đầu; hai nút ở hai cạnh cho phép chuyển thủ công.
+- `public/images/about/newer.jpg`: ảnh Về tôi, có hiệu ứng hover và cửa sổ xem ảnh gốc trên nền đen.
 - `public/images/projects/`: ảnh thẻ dự án và ảnh cửa sổ chi tiết. `image` và `modalImage` trong `projects.ts` chọn ảnh cho từng vị trí; `englishProjects` chọn cùng ảnh với alt text tiếng Anh. Khung ảnh modal giữ đúng tỉ lệ gốc để không tạo khoảng trống.
 - `public/documents/Khuat-Nguyen-Thao-Linh-CV.pdf`: CV thật, liên kết qua `profile.cv`. Nút tải CV nằm cạnh nút gửi email ở phần Liên hệ. Có thể đặt `profile.cv` thành `null` để ẩn nút khi chưa có CV.
 
@@ -65,6 +65,7 @@ Khi thay ảnh, cập nhật đường dẫn và kích thước thực tế tron
 - Các component intro nằm trong `src/components/intro/`; bản đồ SVG nhẹ nằm tại `public/maps/world-map.svg`, dùng dữ liệu Natural Earth public domain. Nguồn và license được ghi trong `public/maps/SOURCES.md`.
 - Link nội bộ sang trang khác được phủ màn chuyển cảnh trước khi Next.js đổi route. Anchor trong cùng trang vẫn cuộn mượt; tải CV, email, điện thoại và link mở tab mới không bị chặn.
 - Reveal trượt lên 30px trong 0,65 giây; các nhóm nội dung xuất hiện so le theo nhịp 0,1 giây. Hover phóng ảnh 1,05 lần, nâng tiêu đề/icon 4px và đổi viền nhẹ.
+- Các nút và điều hướng có viền hồng và quầng sáng nhẹ khi hover hoặc focus bằng bàn phím; màu và độ sáng được quản lý bằng `--button-hover-shadow` trong `globals.css`.
 - Chữ nội dung dùng 17px, chữ phụ 14px và nhãn 12px; bố cục mobile tự nới theo nội dung, không ép chiều cao làm cắt chữ.
 - `prefers-reduced-motion` tắt scrub, parallax và giảm chuyển động; nội dung vẫn hiển thị đầy đủ.
 - Menu và dialog có Escape, focus trap, phục hồi focus và khóa tương tác nội dung nền.

@@ -18,7 +18,7 @@ export const englishImages = {
   },
   portrait: {
     ...images.portrait,
-    alt: "A portrait of Lynhhin wearing a conical hat on a boat amid limestone mountains",
+    alt: "A portrait of Lynhhin wearing a plum-coloured ao dai and a traditional Vietnamese hat",
   },
   project: {
     ...images.project,

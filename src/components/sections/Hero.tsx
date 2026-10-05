@@ -16,7 +16,7 @@ import { usePageReady } from "@/components/motion/PageTransition";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
 import { useScrollStory } from "@/hooks/useScrollStory";
 
-const CAROUSEL_INTERVAL = 6000;
+const CAROUSEL_INTERVAL = 3000;
 
 function heroAnimation(root: HTMLElement, animation: typeof gsap) {
   const sequence = animation.timeline({ defaults: { ease: "power3.out" } });

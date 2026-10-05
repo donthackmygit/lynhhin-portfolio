@@ -51,10 +51,10 @@ export const heroCarousel = carouselPhotos.map(
 export const images = {
   hero: heroCarousel[0],
   portrait: suppliedImage(
-    "/images/about/new.jpg",
-    "Chân dung Lynhhin đội nón lá trên thuyền giữa khung cảnh núi đá vôi",
-    1344,
-    2400,
+    "/images/about/newer.jpg",
+    "Chân dung Lynhhin trong tà áo dài tím và chiếc nón truyền thống Việt Nam",
+    1704,
+    2560,
     "center 62%",
   ),
   project: suppliedImage(
