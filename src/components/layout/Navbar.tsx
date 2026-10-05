@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Download, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/components/language/LanguageProvider";
@@ -17,6 +17,7 @@ export function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
+  const navItems = navigation.filter((item) => item.id !== "lien-he");
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -86,11 +87,11 @@ export function Navbar() {
           <span className="brand-monogram">{profile.initials}</span>
           <span className="brand-name">
             {profile.shortName}
-            <span>TRAVEL JOURNAL</span>
+            <span>{ui.travelJournal}</span>
           </span>
         </a>
         <nav className="desktop-nav" aria-label={ui.mainNavigation}>
-          {navigation.map((item) => (
+          {navItems.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
@@ -104,14 +105,15 @@ export function Navbar() {
         <div className="nav-actions">
           <LanguageSwitcher />
           <a
-            href={profile.cv ?? "#lien-he"}
-            download={profile.cv ? true : undefined}
+            href="#lien-he"
             className="nav-cv"
-            aria-label={profile.cv ? ui.downloadCv : ui.contactName}
-            title={profile.cv ? ui.downloadCv : ui.contactName}
+            aria-label={ui.contactName}
+            title={ui.contactName}
+            aria-current={activeSection === "lien-he" ? "location" : undefined}
+            onClick={() => setMenuOpen(false)}
           >
-            {profile.cv ? <Download size={15} /> : <ArrowUpRight size={18} />}
-            <span>{profile.cv ? ui.downloadCv : ui.contact}</span>
+            <ArrowUpRight size={18} />
+            <span>{ui.contact}</span>
           </a>
           <button
             ref={toggleRef}
@@ -142,7 +144,7 @@ export function Navbar() {
               {ui.journeyWith} {profile.shortName.toUpperCase()}
             </p>
             <nav aria-label={ui.mobileNavigation}>
-              {navigation.map((item, index) => (
+              {navItems.map((item, index) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
@@ -159,13 +161,12 @@ export function Navbar() {
               ))}
             </nav>
             <a
-              href={profile.cv ?? "#lien-he"}
-              download={profile.cv ? true : undefined}
+              href="#lien-he"
               className="button button-primary"
               onClick={() => setMenuOpen(false)}
             >
-              {profile.cv ? <Download size={17} /> : <ArrowUpRight size={19} />}
-              {profile.cv ? ui.downloadCv : profile.hero.secondaryCta}
+              <ArrowUpRight size={19} />
+              {ui.contact}
             </a>
             <p className="mobile-menu-location">{profile.location}</p>
           </motion.div>

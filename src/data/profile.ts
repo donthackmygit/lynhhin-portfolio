@@ -1,27 +1,27 @@
 export const profile = {
   name: "Khuất Nguyễn Thảo Linh",
   shortName: "Lynhhin",
-  initials: "lh.",
+  initials: "Lh.",
   location: "Hà Nội, Việt Nam",
   email: "khuatlinh0601@gmail.com",
   phone: "+84 902 025 828",
   phoneHref: "+84902025828",
   whatsapp: "https://wa.me/84902025828",
-  cv: null as string | null,
+  cv: "/documents/Khuat-Nguyen-Thao-Linh-CV.pdf" as string | null,
   hanoiRecommendationsUrl:
     "https://nextbylocal.com/@lynhhinxinchao/lynhhin-hanoi-recomendation?utm_source=nextbylocal&utm_medium=network&utm_campaign=explore",
   isPlaceholder: false,
   availability: "Kết nối cho những cơ hội trong lĩnh vực du lịch",
-  disciplines: ["Tour guiding", "Culture", "History", "Việt Nam"],
+  disciplines: ["Hướng dẫn du lịch", "Văn hóa", "Lịch sử", "Việt Nam"],
   hero: {
-    eyebrow: "LYNHHIN / TRAVEL & CULTURE",
+    eyebrow: "LYNHHIN / DU LỊCH & VĂN HÓA",
     greeting: "Xin chào, tôi là",
     firstLine: "Khuất Nguyễn",
     secondLine: "Thảo Linh.",
-    quote: "Turning local stories into meaningful journeys",
+    quote: "Biến những câu chuyện địa phương thành hành trình ý nghĩa",
     primaryCta: "Khám phá hành trình",
     secondaryCta: "Kết nối với tôi",
-    imageLocation: "Hội An, Việt Nam",
+    imageLocation: "Hà Nội, Việt Nam",
     imageCaption: "Lịch sử, con người và văn hóa địa phương.",
     bottomNote: "Một hành trình để hiểu hơn về Việt Nam.",
   },
@@ -41,8 +41,6 @@ export const profile = {
       "Phong tục",
       "Đời sống bản địa",
     ],
-    imageCaption:
-      "Cảm hứng từ văn hóa Việt Nam · Ảnh minh họa, không phải chân dung Lynhhin",
     facts: [
       { label: "CÒN ĐƯỢC GỌI LÀ", value: "Lynhhin" },
       {

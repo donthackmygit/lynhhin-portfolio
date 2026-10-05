@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Be_Vietnam_Pro, Lora } from "next/font/google";
+import { Be_Vietnam_Pro, Dancing_Script, Lora } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
 import {
@@ -23,20 +23,32 @@ const beVietnam = Be_Vietnam_Pro({
   display: "swap",
 });
 
+const handwriting = Dancing_Script({
+  subsets: ["latin", "vietnamese"],
+  weight: "600",
+  variable: "--font-handwriting",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
-  title: `${profile.name} (Lynhhin) | Travel & Culture`,
+  title: `${profile.name} (Lynhhin) | Du lịch & Văn hóa`,
   description: `${profile.name} — Lynhhin. Hướng dẫn du lịch, thiết kế trải nghiệm văn hóa, vận hành tour và kết nối với du khách quốc tế.`,
   applicationName: "Lynhhin Travel Journal",
   openGraph: {
-    title: `${profile.name} (Lynhhin) | Travel & Culture`,
+    title: `${profile.name} (Lynhhin) | Du lịch & Văn hóa`,
     description: profile.hero.quote,
     type: "website",
     locale: "vi_VN",
     images: [
-      { url: images.hero.src, width: 1800, height: 1200, alt: images.hero.alt },
+      {
+        url: images.hero.src,
+        width: images.hero.width,
+        height: images.hero.height,
+        alt: images.hero.alt,
+      },
     ],
   },
   robots: { index: !profile.isPlaceholder, follow: !profile.isPlaceholder },
@@ -52,7 +64,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi" className={`${lora.variable} ${beVietnam.variable}`}>
+    <html
+      lang="vi"
+      className={`${lora.variable} ${beVietnam.variable} ${handwriting.variable}`}
+    >
       <body>
         <LanguageProvider>
           <SkipLink />

@@ -1,18 +1,36 @@
 import { profile, sectionCopy, navigation } from "./profile";
+import { experiences } from "./experiences";
 import { projects } from "./projects";
 import { skillGroups, strengths } from "./skills";
 import { achievements } from "./achievements";
-import { images } from "./images";
+import { images, heroCarousel } from "./images";
 import type { Experience, Project } from "./types";
+
+export const englishHeroCarousel = heroCarousel.map((image, index) => ({
+  ...image,
+  alt: `A view of Hanoi — image ${index + 1}`,
+}));
 
 export const englishImages = {
   hero: {
     ...images.hero,
-    alt: "Historic houses in Hoi An reflected in a peaceful riverside",
+    alt: englishHeroCarousel[0].alt,
   },
   portrait: {
     ...images.portrait,
-    alt: "An inspirational image of a woman in a red ao dai on a balcony in Hanoi's Old Quarter",
+    alt: "A portrait of Lynhhin in a white ao dai beside a lake in Hanoi",
+  },
+  project: {
+    ...images.project,
+    alt: "Sharing a moment with international students on a cultural tour of Vietnam",
+  },
+  recommendations: {
+    ...images.recommendations,
+    alt: "Lynhhin's Hanoi food and local experience recommendations",
+  },
+  recommendationModal: {
+    ...images.recommendationModal,
+    alt: "Landscape illustration of Lynhhin's Hanoi food and local experience recommendations",
   },
   hanoi: {
     ...images.hanoi,
@@ -39,10 +57,12 @@ export const englishProfile = {
   disciplines: ["Tour guiding", "Culture", "History", "Vietnam"],
   hero: {
     ...profile.hero,
+    eyebrow: "LYNHHIN / TRAVEL & CULTURE",
     greeting: "Hello, I'm",
+    quote: "Turning local stories into meaningful journeys",
     primaryCta: "Explore my journey",
     secondaryCta: "Connect with me",
-    imageLocation: "Hoi An, Vietnam",
+    imageLocation: "Hanoi, Vietnam",
     imageCaption: "Local history, people and culture.",
     bottomNote: "A journey towards a deeper understanding of Vietnam.",
   },
@@ -62,8 +82,6 @@ export const englishProfile = {
       "Customs and traditions",
       "Local life",
     ],
-    imageCaption:
-      "Inspired by Vietnamese culture · Illustrative image, not a portrait of Lynhhin",
     facts: [
       { label: "ALSO KNOWN AS", value: "Lynhhin" },
       { label: "INTERESTS", value: "History · People · Local culture" },
@@ -191,31 +209,6 @@ export const englishExperiences: Experience[] = [
     ],
   },
   {
-    id: "ftu-international-student-events",
-    year: "2025",
-    category: "EVENT ORGANISATION SUPPORT",
-    title: "Activities for international students",
-    organization:
-      "International Cooperation Department · Foreign Trade University",
-    description:
-      "Helped with activities for international exchange students at FTU, including Orientation Day, the opening ceremony and Camping Day, in collaboration with the International Cooperation Department. These programmes gave me further experience in event support, teamwork, communication and interaction with international students.",
-    highlights: ["Orientation Day", "Opening ceremony", "Camping Day"],
-  },
-  {
-    id: "free-cultural-tour",
-    year: "2025",
-    category: "FREE CULTURAL TOUR",
-    title: "DISCOVER VIETNAM, ON US",
-    organization: "Onetrip with Local",
-    description:
-      "Contributed ideas, supported tour delivery and accompanied 40 international students from 10 countries on a completely free cultural tour marking the 80th anniversary of Vietnam's National Day. The journey introduced Vietnam's history, culture and people through hands-on, welcoming and memorable experiences.",
-    highlights: [
-      "40 international students",
-      "10 countries",
-      "80th anniversary of Vietnam's National Day",
-    ],
-  },
-  {
     id: "continuing-tour-guiding",
     year: "2026",
     period: "Ongoing",
@@ -230,10 +223,19 @@ export const englishExperiences: Experience[] = [
       "Continued learning",
     ],
   },
-];
+].map((experience) => {
+  const source = experiences.find((entry) => entry.id === experience.id);
+  return {
+    ...experience,
+    year: source?.year ?? experience.year,
+    month: source?.month,
+  };
+});
 
 type ProjectTranslation = Pick<
   Project,
+  | "title"
+  | "imageCaption"
   | "subtitle"
   | "description"
   | "category"
@@ -252,6 +254,8 @@ type ProjectTranslation = Pick<
 
 const projectTranslations: Record<string, ProjectTranslation> = {
   "discover-vietnam-on-us": {
+    title: "DISCOVER VIETNAM, ON US",
+    imageCaption: "Hanoi · Moments from a cultural journey",
     subtitle:
       "A Free Cultural Journey for International Students · by Onetrip with Local",
     description:
@@ -276,6 +280,8 @@ const projectTranslations: Record<string, ProjectTranslation> = {
       "I learned that a good tour requires more than destination knowledge. It also calls for adaptability, communication, teamwork, attentiveness to visitors and the ability to handle unexpected changes.",
   },
   "lynhhins-hanoi-recommendations": {
+    title: "Lynhhin's Hanoi Recommendations",
+    imageCaption: "Hanoi through Lynhhin's recommendations",
     subtitle: "Explore Hanoi through a local's eyes",
     description:
       "A collection of recommendations for visitors to Hanoi, focused on culture, food and experiences rooted in local life.",
@@ -307,7 +313,13 @@ const projectTranslations: Record<string, ProjectTranslation> = {
 export const englishProjects: Project[] = projects.map((project) => ({
   ...project,
   ...projectTranslations[project.id],
-  image: englishImages.hanoi,
+  image:
+    project.id === "discover-vietnam-on-us"
+      ? englishImages.project
+      : englishImages.recommendations,
+  modalImage: project.modalImage
+    ? englishImages.recommendationModal
+    : undefined,
 }));
 
 const skillTranslations: Record<string, { title: string; items: string[] }> = {

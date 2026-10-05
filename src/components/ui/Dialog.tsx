@@ -12,6 +12,7 @@ type DialogProps = {
   title: string;
   children: React.ReactNode;
   className?: string;
+  variant?: "default" | "image";
 };
 
 export function Dialog({
@@ -20,6 +21,7 @@ export function Dialog({
   title,
   children,
   className = "",
+  variant = "default",
 }: DialogProps) {
   const {
     content: { ui },
@@ -29,6 +31,7 @@ export function Dialog({
   const closeRef = useRef<HTMLButtonElement>(null);
   const onCloseRef = useRef(onClose);
   const reduceMotion = useReducedMotion();
+  const imageOnly = variant === "image";
   onCloseRef.current = onClose;
 
   useEffect(() => {
@@ -93,7 +96,7 @@ export function Dialog({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="dialog-backdrop"
+          className={`dialog-backdrop ${imageOnly ? "image-lightbox-backdrop" : ""}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -104,14 +107,24 @@ export function Dialog({
         >
           <motion.div
             ref={panelRef}
-            className={`dialog-panel ${className}`}
+            className={`dialog-panel ${className} ${imageOnly ? "image-lightbox-panel" : ""}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
             tabIndex={-1}
-            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
+            initial={
+              reduceMotion
+                ? false
+                : imageOnly
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: 24 }
+            }
+            animate={imageOnly ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={
+              imageOnly
+                ? { opacity: 0 }
+                : { opacity: 0, y: reduceMotion ? 0 : 12 }
+            }
             transition={{ duration: reduceMotion ? 0 : 0.3 }}
           >
             <h2 id={titleId} className="sr-only">

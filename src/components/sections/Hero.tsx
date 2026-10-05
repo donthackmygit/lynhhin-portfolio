@@ -4,14 +4,19 @@ import {
   ArrowDown,
   ArrowDownRight,
   ArrowUpRight,
-  Download,
+  ChevronLeft,
+  ChevronRight,
   MapPin,
 } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import type { gsap } from "gsap";
 import { useLanguage } from "@/components/language/LanguageProvider";
+import { usePageReady } from "@/components/motion/PageTransition";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
 import { useScrollStory } from "@/hooks/useScrollStory";
+
+const CAROUSEL_INTERVAL = 6000;
 
 function heroAnimation(root: HTMLElement, animation: typeof gsap) {
   const sequence = animation.timeline({ defaults: { ease: "power3.out" } });
@@ -45,10 +50,47 @@ function heroAnimation(root: HTMLElement, animation: typeof gsap) {
 
 export function Hero() {
   const {
-    content: { profile, images, ui },
+    content: { profile, heroCarousel, ui },
   } = useLanguage();
   const ref = useRef<HTMLElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [inView, setInView] = useState(true);
+  const [documentVisible, setDocumentVisible] = useState(true);
+  const reduceMotion = useReducedMotion();
+  const pageReady = usePageReady();
+  const rotating = !reduceMotion && inView && documentVisible && pageReady;
+  const slideCount = heroCarousel.length;
   useScrollStory(ref, heroAnimation);
+
+  useEffect(() => {
+    const updateVisibility = () => setDocumentVisible(!document.hidden);
+    updateVisibility();
+    document.addEventListener("visibilitychange", updateVisibility);
+    const observer = new IntersectionObserver(
+      ([entry]) =>
+        setInView(entry.isIntersecting && entry.intersectionRatio >= 0.1),
+      { threshold: 0.1 },
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", updateVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!rotating || slideCount < 2) return;
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slideCount);
+    }, CAROUSEL_INTERVAL);
+    return () => window.clearInterval(timer);
+  }, [activeSlide, rotating, slideCount]);
+
+  const moveSlide = (direction: number) => {
+    setActiveSlide(
+      (current) => (current + direction + slideCount) % slideCount,
+    );
+  };
 
   return (
     <section
@@ -58,12 +100,32 @@ export function Hero() {
       aria-labelledby="hero-title"
     >
       <div className="hero-scene">
-        <JournalPhoto
-          image={images.hero}
+        <div
+          id="hero-carousel-images"
           className="hero-photograph"
-          sizes="100vw"
-          priority
-        />
+          role="group"
+          aria-roledescription={ui.carousel}
+          aria-label={ui.hanoiCarousel}
+        >
+          {heroCarousel.map((image, index) => (
+            <div
+              key={image.src}
+              className="hero-slide"
+              data-active={index === activeSlide}
+              aria-hidden={index !== activeSlide}
+              role="group"
+              aria-label={`${ui.slide} ${index + 1} / ${slideCount}`}
+            >
+              <JournalPhoto
+                image={image}
+                className="hero-slide-photo"
+                sizes="100vw"
+                priority={index === 0}
+                quality={85}
+              />
+            </div>
+          ))}
+        </div>
         <div className="hero-shade" aria-hidden="true" />
         <div className="container hero-content">
           <div className="hero-eyebrow">
@@ -85,23 +147,29 @@ export function Hero() {
               </span>
             ))}
           </p>
-          <p className="hero-quote hero-support" lang="en">
-            {profile.hero.quote}
-          </p>
+          <p className="hero-quote hero-support">{profile.hero.quote}</p>
           <div className="hero-actions hero-support">
             <a className="button button-white" href="#hanh-trinh">
               {profile.hero.primaryCta}
               <ArrowDownRight size={19} />
             </a>
-            <a
-              className="hero-cv"
-              href={profile.cv ?? "#lien-he"}
-              download={profile.cv ? true : undefined}
-            >
-              {profile.cv && <Download size={16} />}
-              {profile.cv ? ui.downloadCv : profile.hero.secondaryCta}
+            <a className="hero-cv" href="#lien-he">
+              {profile.hero.secondaryCta}
               <ArrowUpRight size={15} />
             </a>
+          </div>
+          <div className="hero-carousel-controls hero-support">
+            <span
+              className="hero-carousel-count"
+              aria-live={rotating ? "off" : "polite"}
+              aria-atomic="true"
+            >
+              <span className="sr-only">{ui.slide} </span>
+              {String(activeSlide + 1).padStart(2, "0")}
+              <span aria-hidden="true"> / </span>
+              <span className="sr-only"> / </span>
+              {String(slideCount).padStart(2, "0")}
+            </span>
           </div>
           <div className="hero-location hero-support">
             <MapPin size={16} />
@@ -118,6 +186,38 @@ export function Hero() {
           >
             <ArrowDown size={20} />
           </a>
+        </div>
+        <div
+          className="hero-carousel-navigation"
+          role="group"
+          aria-label={ui.hanoiCarousel}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+              event.preventDefault();
+              moveSlide(event.key === "ArrowLeft" ? -1 : 1);
+            }
+          }}
+        >
+          <button
+            type="button"
+            className="hero-carousel-button hero-carousel-previous"
+            onClick={() => moveSlide(-1)}
+            aria-label={ui.previousImage}
+            title={ui.previousImage}
+            aria-controls="hero-carousel-images"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            type="button"
+            className="hero-carousel-button hero-carousel-next"
+            onClick={() => moveSlide(1)}
+            aria-label={ui.nextImage}
+            title={ui.nextImage}
+            aria-controls="hero-carousel-images"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
         <div className="hero-bottom-line" aria-hidden="true" />
       </div>

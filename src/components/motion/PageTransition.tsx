@@ -3,6 +3,7 @@
 import { animate } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import {
+  useCallback,
   createContext,
   useContext,
   useEffect,
@@ -12,6 +13,8 @@ import {
   type MouseEvent,
 } from "react";
 import { profile } from "@/data/profile";
+import { TravelIntro } from "@/components/intro/TravelIntro";
+import { hasSeenIntro, markIntroSeen } from "@/components/intro/intro-session";
 
 const PageReadyContext = createContext(true);
 const ease = [0.25, 1, 0.5, 1] as const;
@@ -23,30 +26,68 @@ export function usePageReady() {
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [ready, setReady] = useState(false);
+  const [readyPath, setReadyPath] = useState<string | null>(null);
+  const ready = readyPath === pathname;
+  const [introVisible, setIntroVisible] = useState(pathname === "/");
+  const introFinishedRef = useRef(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const stopAnimations = useRef<Array<() => void>>([]);
   const overflowRef = useRef<string | null>(null);
+  const gutterRef = useRef<string | null>(null);
+  const skipLinkRef = useRef<{ element: HTMLElement; inert: boolean } | null>(
+    null,
+  );
   const navigatingRef = useRef(false);
   const navigationTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function unlockContent() {
+  const unlockContent = useCallback(() => {
     if (contentRef.current) contentRef.current.inert = false;
     if (overflowRef.current !== null) {
       document.body.style.overflow = overflowRef.current;
       overflowRef.current = null;
     }
-  }
+    if (gutterRef.current !== null) {
+      document.documentElement.style.scrollbarGutter = gutterRef.current;
+      gutterRef.current = null;
+    }
+    if (skipLinkRef.current) {
+      skipLinkRef.current.element.inert = skipLinkRef.current.inert;
+      skipLinkRef.current = null;
+    }
+  }, []);
 
-  function lockContent() {
+  const lockContent = useCallback(() => {
     if (contentRef.current) contentRef.current.inert = true;
+    if (gutterRef.current === null) {
+      gutterRef.current = document.documentElement.style.scrollbarGutter;
+      document.documentElement.style.scrollbarGutter = "stable";
+    }
+    if (!skipLinkRef.current) {
+      const element = document.querySelector<HTMLElement>(".skip-link");
+      if (element) {
+        skipLinkRef.current = { element, inert: element.inert };
+        element.inert = true;
+      }
+    }
     if (overflowRef.current === null) {
       overflowRef.current = document.body.style.overflow;
       document.body.style.overflow = "hidden";
     }
-  }
+  }, []);
+
+  const revealIntro = useCallback(() => setReadyPath(pathname), [pathname]);
+  const completeIntro = useCallback(() => {
+    const focusWasInIntro = document.activeElement?.closest(".travel-intro");
+    introFinishedRef.current = true;
+    setIntroVisible(false);
+    unlockContent();
+    setReadyPath(pathname);
+    if (focusWasInIntro) {
+      document.getElementById("noi-dung")?.focus({ preventScroll: true });
+    }
+  }, [pathname, unlockContent]);
 
   useLayoutEffect(() => {
     const overlay = overlayRef.current;
@@ -62,7 +103,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       overlay.hidden = true;
       unlockContent();
       navigatingRef.current = false;
-      setReady(true);
+      setReadyPath(pathname);
     }
 
     function stop() {
@@ -76,14 +117,35 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       finish();
     };
 
+    if (navigationTimer.current) clearTimeout(navigationTimer.current);
+    navigationTimer.current = null;
+    navigatingRef.current = false;
+
+    // The homepage uses the travel intro instead of stacking two entry screens.
+    // Keep the existing transition for navigation to other pages.
+    if (pathname === "/") {
+      overlay.hidden = true;
+      if (preference.matches || hasSeenIntro() || introFinishedRef.current) {
+        document.getElementById("travel-intro-first-paint")?.remove();
+        setIntroVisible(false);
+        finish();
+      } else {
+        setIntroVisible(true);
+        lockContent();
+      }
+      return () => {
+        controller.abort();
+        stop();
+        if (navigationTimer.current) clearTimeout(navigationTimer.current);
+        unlockContent();
+      };
+    }
+
     if (preference.matches) {
       finish();
       return;
     }
 
-    if (navigationTimer.current) clearTimeout(navigationTimer.current);
-    navigatingRef.current = false;
-    setReady(false);
     lockContent();
     overlay.hidden = false;
     overlay.style.opacity = "1";
@@ -129,22 +191,25 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       overlay.hidden = true;
       unlockContent();
     };
-  }, [pathname]);
+  }, [pathname, lockContent, unlockContent]);
 
   useEffect(() => {
     const onPageShow = (event: PageTransitionEvent) => {
       if (!event.persisted) return;
       if (overlayRef.current) overlayRef.current.hidden = true;
+      if (introVisible) markIntroSeen();
+      introFinishedRef.current = true;
+      setIntroVisible(false);
       unlockContent();
       navigatingRef.current = false;
-      setReady(true);
+      setReadyPath(pathname);
     };
     window.addEventListener("pageshow", onPageShow);
     return () => {
       window.removeEventListener("pageshow", onPageShow);
       if (navigationTimer.current) clearTimeout(navigationTimer.current);
     };
-  }, []);
+  }, [introVisible, pathname, unlockContent]);
 
   function onNavigate(event: MouseEvent<HTMLDivElement>) {
     if (
@@ -181,6 +246,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     event.preventDefault();
     if (navigatingRef.current || !ready) return;
     navigatingRef.current = true;
+    setReadyPath(null);
     lockContent();
     overlay.hidden = false;
     line.style.transform = "scaleX(0)";
@@ -195,7 +261,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       overlay.hidden = true;
       unlockContent();
       navigatingRef.current = false;
-      setReady(true);
+      setReadyPath(pathname);
     }, 5000);
     void Promise.resolve(cover).then(() => {
       if (!navigatingRef.current) return;
@@ -228,6 +294,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           </span>
         </div>
       </div>
+      {introVisible && pathname === "/" && (
+        <TravelIntro onReveal={revealIntro} onComplete={completeIntro} />
+      )}
     </PageReadyContext.Provider>
   );
 }

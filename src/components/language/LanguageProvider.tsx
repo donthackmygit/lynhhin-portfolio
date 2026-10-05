@@ -64,7 +64,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.title = `${content.profile.name} (Lynhhin) | Travel & Culture`;
+    document.title = content.ui.siteTitle;
     const metaValues: Record<string, string> = {
       'meta[name="description"]': content.ui.siteDescription,
       'meta[property="og:title"]': document.title,

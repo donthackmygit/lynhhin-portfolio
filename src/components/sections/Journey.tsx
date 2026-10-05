@@ -5,6 +5,7 @@ import { useRef } from "react";
 import type { gsap } from "gsap";
 import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { JournalDate } from "@/components/ui/JournalDate";
 import { useScrollStory } from "@/hooks/useScrollStory";
 
 function journeyAnimation(root: HTMLElement, animation: typeof gsap) {
@@ -51,6 +52,34 @@ function journeyAnimation(root: HTMLElement, animation: typeof gsap) {
         toggleActions: "play none none reverse",
       },
     });
+    item
+      .querySelectorAll<HTMLElement>(".timeline-activity")
+      .forEach((activity) => {
+        const month = activity.querySelector(".timeline-month");
+        if (!month) return;
+        animation.to(month, {
+          color: "#B8403A",
+          duration: 0.25,
+          scrollTrigger: {
+            trigger: activity,
+            start: "top 68%",
+            toggleActions: "play none none reverse",
+          },
+        });
+        const dot = activity.querySelector(".timeline-month-dot");
+        if (!dot) return;
+        animation.to(dot, {
+          backgroundColor: "#B8403A",
+          borderColor: "#B8403A",
+          scale: 1.1,
+          duration: 0.25,
+          scrollTrigger: {
+            trigger: activity,
+            start: "top 68%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
   });
 }
 
@@ -99,20 +128,38 @@ export function Journey() {
             {years.map((year) => (
               <li key={year} className="timeline-item">
                 <div className="timeline-marker">
-                  <time className="timeline-year" dateTime={year}>
-                    {year}
-                  </time>
+                  <JournalDate className="timeline-year" year={year} />
                   <span className="timeline-dot" aria-hidden="true" />
                 </div>
                 <div className="timeline-content">
                   {experiences
                     .filter((experience) => experience.year === year)
-                    .map((experience) => (
+                    .sort(
+                      (first, second) =>
+                        (first.month ?? 13) - (second.month ?? 13),
+                    )
+                    .map((experience, activityIndex) => (
                       <article
                         key={experience.id}
                         id={experience.id}
                         className="timeline-activity"
                       >
+                        {experience.month !== undefined && (
+                          <div className="timeline-activity-date">
+                            {activityIndex > 0 && (
+                              <span
+                                className="timeline-dot timeline-month-dot"
+                                aria-hidden="true"
+                              />
+                            )}
+                            <JournalDate
+                              className="timeline-month"
+                              year={experience.year}
+                              month={experience.month}
+                              showYear={false}
+                            />
+                          </div>
+                        )}
                         <div className="timeline-meta">
                           <span className="eyebrow">{experience.category}</span>
                           {experience.period && (

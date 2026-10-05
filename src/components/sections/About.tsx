@@ -1,15 +1,18 @@
 "use client";
 
 import { ArrowUpRight, MapPin } from "lucide-react";
+import { useState } from "react";
 import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
+import { ImageLightbox } from "@/components/ui/ImageLightbox";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function About() {
   const {
     content: { profile, images, ui },
   } = useLanguage();
+  const [photoOpen, setPhotoOpen] = useState(false);
   return (
     <section
       id="ve-toi"
@@ -27,15 +30,19 @@ export function About() {
         <div className="about-grid">
           <Reveal className="about-image-column">
             <figure className="about-figure">
-              <JournalPhoto
-                image={images.portrait}
-                className="about-photo"
-                sizes="(max-width: 767px) 90vw, 40vw"
-              />
-              <figcaption>
-                <span>{ui.aboutImageEyebrow}</span>
-                <span>{profile.about.imageCaption}</span>
-              </figcaption>
+              <button
+                type="button"
+                className="about-photo-button"
+                onClick={() => setPhotoOpen(true)}
+                aria-label={`${ui.viewPhoto}: ${profile.name}`}
+                aria-haspopup="dialog"
+              >
+                <JournalPhoto
+                  image={images.portrait}
+                  className="about-photo"
+                  sizes="(max-width: 767px) 90vw, 40vw"
+                />
+              </button>
             </figure>
             <div className="about-location">
               <MapPin size={14} />
@@ -75,6 +82,11 @@ export function About() {
           </div>
         </div>
       </div>
+      <ImageLightbox
+        image={images.portrait}
+        open={photoOpen}
+        onClose={() => setPhotoOpen(false)}
+      />
     </section>
   );
 }

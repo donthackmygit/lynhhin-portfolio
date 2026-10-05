@@ -9,12 +9,14 @@ import { Skills } from "@/components/sections/Skills";
 import { Achievements } from "@/components/sections/Achievements";
 import { Strengths } from "@/components/sections/Strengths";
 import { Contact } from "@/components/sections/Contact";
+import { IntroBootstrap } from "@/components/intro/IntroBootstrap";
 
 export default function Home() {
   return (
     <>
+      <IntroBootstrap />
       <Navbar />
-      <main id="noi-dung">
+      <main id="noi-dung" tabIndex={-1}>
         <Hero />
         <About />
         <Journey />

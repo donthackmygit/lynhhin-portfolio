@@ -6,6 +6,7 @@ import { images } from "../src/data/images.ts";
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
 
 for (const image of Object.values(images)) {
+  if (!/^https?:\/\//.test(image.downloadUrl)) continue;
   const response = await fetch(image.downloadUrl, {
     signal: AbortSignal.timeout(30000),
   });

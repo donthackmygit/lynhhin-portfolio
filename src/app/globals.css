@@ -345,10 +345,11 @@ em {
   width: min(260px, calc(100% - 64px));
 }
 .page-transition-monogram {
-  font-family: var(--font-lora), Georgia, serif;
+  font-family: var(--font-handwriting), cursive;
   font-size: 72px;
   line-height: 1.2;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 600;
   color: var(--red);
 }
 .page-transition-name {
@@ -404,10 +405,11 @@ em {
   flex-shrink: 0;
 }
 .brand-monogram {
-  font-family: var(--font-lora), Georgia, serif;
+  font-family: var(--font-handwriting), cursive;
   color: var(--red);
-  font-size: 41px;
-  font-style: italic;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 600;
   line-height: 1;
 }
 .brand-name {
@@ -536,18 +538,20 @@ em {
   gap: 9px;
   height: 38px;
   padding-inline: 16px;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: var(--red);
+  color: var(--white);
   font-size: var(--text-small);
+  font-weight: 500;
   transition:
     border-color 200ms,
     color 200ms,
     background 200ms;
 }
 .nav-cv:hover {
-  color: var(--red);
-  border-color: var(--red);
-  background: var(--soft-cream);
+  color: var(--white);
+  background: var(--deep-red);
 }
 .menu-toggle,
 .mobile-menu {
@@ -559,6 +563,7 @@ em {
   scroll-margin-top: var(--nav-height);
 }
 .hero-scene {
+  --hero-gutter: max(var(--page-gutter), 72px);
   position: relative;
   min-height: 580px;
   overflow: hidden;
@@ -571,12 +576,34 @@ em {
   height: 100%;
   width: 100%;
 }
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 850ms ease-in-out;
+}
+.hero-slide[data-active="true"] {
+  opacity: 1;
+}
+.hero-slide-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
 .hero-shade {
   position: absolute;
   inset: 0;
-  background: rgba(16, 23, 19, 0.34);
+  background: linear-gradient(
+    90deg,
+    rgba(16, 23, 19, 0.58),
+    rgba(16, 23, 19, 0.3) 70%,
+    rgba(16, 23, 19, 0.38)
+  );
+  pointer-events: none;
 }
 .hero-content {
+  width: min(var(--container), calc(100% - var(--hero-gutter) * 2));
   min-height: inherit;
   position: relative;
   padding-block: 42px 72px;
@@ -669,6 +696,63 @@ em {
 .hero-cv:hover {
   color: var(--cream);
 }
+.hero-carousel-controls {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-left: 56px;
+  margin-top: 24px;
+}
+.hero-carousel-navigation {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.hero-carousel-navigation .hero-carousel-button {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+.hero-carousel-previous {
+  left: clamp(12px, 2vw, 32px);
+}
+.hero-carousel-next {
+  right: clamp(12px, 2vw, 32px);
+}
+.hero-carousel-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  transition:
+    background 200ms,
+    border-color 200ms,
+    transform 200ms var(--ease);
+}
+.hero-carousel-button:hover,
+.hero-carousel-button:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--white);
+}
+.hero-carousel-button:active {
+  transform: scale(0.94);
+}
+.hero-carousel-count {
+  min-width: 58px;
+  text-align: center;
+  font-size: var(--text-label);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
 .hero-location {
   position: absolute;
   right: 0;
@@ -753,22 +837,22 @@ em {
 .about-image-column {
   padding-right: 35px;
 }
+.about-photo-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border-radius: 210px 210px 3px 3px;
+  cursor: zoom-in;
+  transition:
+    transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 350ms var(--ease);
+}
+.about-photo-button:focus-visible {
+  box-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
+}
 .about-photo {
   aspect-ratio: 0.89;
   border-radius: 210px 210px 3px 3px;
-}
-.about-figure figcaption {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: var(--text-small);
-}
-.about-figure figcaption > span:first-child {
-  font-size: var(--text-label);
-  color: var(--red);
-  font-weight: 500;
 }
 .about-location {
   display: flex;
@@ -935,6 +1019,30 @@ em {
   margin-top: 30px;
   padding-top: 26px;
   border-top: 1px solid var(--rule);
+}
+.timeline-activity-date {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 25px;
+  margin-bottom: 8px;
+}
+.timeline-month {
+  color: var(--green);
+  font-size: var(--text-label);
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.timeline-month-dot {
+  position: absolute;
+  top: 50%;
+  left: calc(0px - var(--timeline-content-gap) - var(--timeline-dot-size));
+  width: 9px;
+  height: 9px;
+  margin-left: 2px;
+  transform: translateY(-50%);
 }
 .timeline-detail {
   margin-block: 20px;
@@ -1541,9 +1649,24 @@ em {
 .contact-cta {
   gap: 13px;
 }
+.contact-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
 .contact-cv {
-  margin-left: 25px;
+  gap: 10px;
+  color: var(--red);
+  background: var(--white);
+  border-color: var(--red);
   font-size: var(--text-action);
+}
+.contact-cv:hover {
+  color: var(--deep-red);
+  background: var(--soft-cream);
+  border-color: var(--deep-red);
+  transform: translateY(-2px);
 }
 .contact-details {
   padding-top: 15px;
@@ -1728,6 +1851,44 @@ em {
 .dialog-photo {
   aspect-ratio: 2.4;
 }
+.project-dialog .dialog-photo {
+  max-height: 65dvh;
+  background: #141715;
+}
+.dialog-backdrop.image-lightbox-backdrop {
+  padding: 36px 24px;
+  background: #000;
+}
+.dialog-panel.image-lightbox-panel {
+  width: fit-content;
+  max-width: 100%;
+  max-height: calc(100dvh - 72px);
+  overflow: visible;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.image-lightbox-photo {
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 72px);
+  object-fit: contain;
+}
+.image-lightbox-panel .dialog-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.image-lightbox-panel .dialog-close:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.24);
+}
 .dialog-content {
   padding: 36px 44px 40px;
 }
@@ -1899,6 +2060,11 @@ em {
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .about-photo-button:hover,
+  .about-photo-button:focus-visible {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(228, 135, 167, 0.2);
+  }
   .project-row:is(:hover, :focus-within) .project-photo img,
   .destination:is(:hover, :focus-within) .destination-photo img {
     scale: 1.05;
@@ -2044,6 +2210,9 @@ em {
     color: var(--muted);
     font-size: var(--text-label);
     margin-bottom: 22px;
+  }
+  .mobile-menu > .button {
+    border-radius: 11px;
   }
   .mobile-menu nav {
     margin-bottom: 28px;
@@ -2286,10 +2455,19 @@ em {
     width: 36px;
   }
   .hero-scene {
+    --hero-gutter: 56px;
     min-height: 540px;
   }
+  .hero-carousel-navigation .hero-carousel-button {
+    width: 36px;
+    height: 36px;
+  }
   .hero-shade {
-    background: rgba(16, 23, 19, 0.38);
+    background: linear-gradient(
+      90deg,
+      rgba(16, 23, 19, 0.62),
+      rgba(16, 23, 19, 0.42)
+    );
   }
   .hero-content {
     padding-block: 32px 80px;
@@ -2412,12 +2590,8 @@ em {
     aspect-ratio: 1.08;
     border-radius: 180px 180px 3px 3px;
   }
-  .about-figure figcaption {
-    margin-top: 14px;
-    gap: 3px;
-  }
-  .about-figure figcaption > span:first-child {
-    font-size: var(--text-label);
+  .about-photo-button {
+    border-radius: 180px 180px 3px 3px;
   }
   .about-location {
     margin-top: 8px;
@@ -2902,9 +3076,6 @@ em {
   }
   .contact-main h2 {
     font-size: 31px;
-  }
-  .contact-cv {
-    margin-left: 13px;
   }
   .contact-cta {
     padding-inline: 18px;

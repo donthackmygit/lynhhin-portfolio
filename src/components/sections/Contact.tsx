@@ -38,7 +38,7 @@ export function Contact() {
               </h2>
               <p className="contact-description">{copy.description}</p>
             </Reveal>
-            <Reveal delay={0.12}>
+            <Reveal delay={0.12} className="contact-actions">
               <a
                 href={`mailto:${profile.email}?subject=${encodeURIComponent(copy.mailSubject)}`}
                 className="button button-primary contact-cta"
@@ -48,8 +48,12 @@ export function Contact() {
                 <ArrowUpRight size={20} />
               </a>
               {profile.cv && (
-                <a href={profile.cv} download className="text-link contact-cv">
-                  <Download size={16} />
+                <a
+                  href={profile.cv}
+                  download="Khuat-Nguyen-Thao-Linh-CV.pdf"
+                  className="button contact-cv"
+                >
+                  <Download size={18} />
                   {ui.downloadCv}
                 </a>
               )}

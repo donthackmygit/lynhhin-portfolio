@@ -18,6 +18,7 @@ export const experiences: Experience[] = [
   {
     id: "nara-exchange",
     year: "2025",
+    month: 7,
     category: "TRAO ĐỔI & TRẢI NGHIỆM VĂN HÓA",
     title: "Chương trình trao đổi tại Nara Women’s University, Nhật Bản",
     organization: "Nara Women’s University · Nhật Bản",
@@ -39,6 +40,7 @@ export const experiences: Experience[] = [
   {
     id: "ftu-exchange-student-buddy",
     year: "2025",
+    month: 8,
     category: "GIAO TIẾP ĐA VĂN HÓA",
     title: "FTU Exchange Student Buddy",
     organization: "Trường Đại học Ngoại thương",
@@ -48,30 +50,6 @@ export const experiences: Experience[] = [
       "Đồng hành cùng sinh viên quốc tế",
       "Hỗ trợ người nước ngoài",
       "Kết nối đa văn hóa",
-    ],
-  },
-  {
-    id: "ftu-international-student-events",
-    year: "2025",
-    category: "HỖ TRỢ TỔ CHỨC SỰ KIỆN",
-    title: "Hoạt động dành cho sinh viên quốc tế",
-    organization: "Phòng Hợp tác Quốc tế · Trường Đại học Ngoại thương",
-    description:
-      "Tham gia hỗ trợ các hoạt động dành cho sinh viên trao đổi quốc tế tại FTU, bao gồm Orientation Day, ngày khai giảng và Camping Day, phối hợp cùng Phòng Hợp tác Quốc tế — Trường Đại học Ngoại thương. Qua các chương trình này, tôi tích lũy thêm kinh nghiệm về hỗ trợ tổ chức sự kiện, làm việc nhóm, giao tiếp và tương tác với sinh viên quốc tế.",
-    highlights: ["Orientation Day", "Ngày khai giảng", "Camping Day"],
-  },
-  {
-    id: "free-cultural-tour",
-    year: "2025",
-    category: "TOUR VĂN HÓA MIỄN PHÍ",
-    title: "DISCOVER VIETNAM, ON US",
-    organization: "Onetrip with Local",
-    description:
-      "Đóng góp ý tưởng, hỗ trợ triển khai và đồng hành cùng 40 sinh viên quốc tế đến từ 10 quốc gia trong một tour văn hóa hoàn toàn miễn phí, nhân dịp kỷ niệm 80 năm Quốc khánh Việt Nam. Hành trình giới thiệu lịch sử, văn hóa và con người Việt Nam qua những trải nghiệm thực tế, gần gũi và đáng nhớ.",
-    highlights: [
-      "40 sinh viên quốc tế",
-      "10 quốc gia",
-      "80 năm Quốc khánh Việt Nam",
     ],
   },
   {

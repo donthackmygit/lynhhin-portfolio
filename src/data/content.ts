@@ -3,7 +3,7 @@ import { experiences } from "./experiences";
 import { projects } from "./projects";
 import { skillGroups, strengths } from "./skills";
 import { achievements } from "./achievements";
-import { images } from "./images";
+import { images, heroCarousel } from "./images";
 import {
   englishProfile,
   englishNavigation,
@@ -14,6 +14,7 @@ import {
   englishStrengths,
   englishAchievements,
   englishImages,
+  englishHeroCarousel,
 } from "./english";
 
 export type Locale = "vi" | "en";
@@ -28,7 +29,13 @@ const vietnameseUi = {
   openMenu: "Mở menu",
   closeMenu: "Đóng menu",
   journeyWith: "MỘT HÀNH TRÌNH CÙNG",
-  aboutImageEyebrow: "01 / MỘT CHÚT CẢM HỨNG",
+  travelJournal: "NHẬT KÝ HÀNH TRÌNH",
+  hanoiCarousel: "Những góc nhìn Hà Nội",
+  carousel: "Bộ ảnh luân phiên",
+  slide: "Ảnh",
+  previousImage: "Ảnh trước",
+  nextImage: "Ảnh tiếp theo",
+  viewPhoto: "Xem ảnh đầy đủ",
   interests: "Sở thích",
   continueJourney: "Đi tiếp cùng tôi",
   scrollToAbout: "Cuộn đến phần về tôi",
@@ -39,12 +46,12 @@ const vietnameseUi = {
   close: "Đóng",
   viewProject: "Xem dự án",
   projectLabel: "DỰ ÁN",
-  projectImageCaption: "Hà Nội · Ảnh minh họa",
+  projectImageCaption: "Hà Nội · Những câu chuyện địa phương",
   role: "VAI TRÒ",
   projectDetails: "Chi tiết dự án",
-  openRecommendations: "Mở Lynhhin's Hanoi Recommendations",
+  openRecommendations: "Mở gợi ý khám phá Hà Nội của Lynhhin",
   qrRecommendations:
-    "Mã QR tới Lynhhin's Hanoi Recommendations trên NextbyLocal",
+    "Mã QR tới gợi ý khám phá Hà Nội của Lynhhin trên NextbyLocal",
   contactClosing: "Hẹn gặp ở một hành trình mới.",
   journeyFirstLine: "Hành",
   journeySecondLine: "trình.",
@@ -52,6 +59,7 @@ const vietnameseUi = {
     "Học từ môi trường thực tế, từ những chuyến tour và từ những người tôi đồng hành.",
   journeyEyebrow: "TRẢI NGHIỆM & KẾT NỐI",
   languageSelector: "Chọn ngôn ngữ",
+  siteTitle: `${profile.name} (Lynhhin) | Du lịch & Văn hóa`,
   siteDescription: `${profile.name} — Lynhhin. Hướng dẫn du lịch, thiết kế trải nghiệm văn hóa, vận hành tour và kết nối với du khách quốc tế.`,
 };
 
@@ -65,7 +73,13 @@ const englishUi = {
   openMenu: "Open menu",
   closeMenu: "Close menu",
   journeyWith: "A JOURNEY WITH",
-  aboutImageEyebrow: "01 / A LITTLE INSPIRATION",
+  travelJournal: "TRAVEL JOURNAL",
+  hanoiCarousel: "Views of Hanoi",
+  carousel: "Carousel",
+  slide: "Image",
+  previousImage: "Previous image",
+  nextImage: "Next image",
+  viewPhoto: "View full photo",
   interests: "Interests",
   continueJourney: "Continue the journey with me",
   scrollToAbout: "Scroll to about me",
@@ -76,7 +90,7 @@ const englishUi = {
   close: "Close",
   viewProject: "View project",
   projectLabel: "PROJECT",
-  projectImageCaption: "Hanoi · Illustrative image",
+  projectImageCaption: "Hanoi · Local stories",
   role: "ROLE",
   projectDetails: "Project details",
   openRecommendations: "Open Lynhhin's Hanoi Recommendations",
@@ -89,6 +103,7 @@ const englishUi = {
     "Learning from hands-on experiences, from tours and from the people I travel with.",
   journeyEyebrow: "EXPERIENCES & CONNECTIONS",
   languageSelector: "Select language",
+  siteTitle: `${profile.name} (Lynhhin) | Travel & Culture`,
   siteDescription: `${profile.name} — Lynhhin. Tour guiding, cultural experience design, tour operations and connections with international visitors.`,
 } satisfies typeof vietnameseUi;
 
@@ -103,6 +118,7 @@ export const contentByLocale = {
     strengths,
     achievements,
     images,
+    heroCarousel,
     ui: vietnameseUi,
   },
   en: {
@@ -115,6 +131,7 @@ export const contentByLocale = {
     strengths: englishStrengths,
     achievements: englishAchievements,
     images: englishImages,
+    heroCarousel: englishHeroCarousel,
     ui: englishUi,
   },
 };

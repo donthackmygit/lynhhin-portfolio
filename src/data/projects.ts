@@ -6,14 +6,16 @@ export const projects: Project[] = [
   {
     id: "discover-vietnam-on-us",
     year: "2025",
+    month: 10,
     number: "01",
-    title: "DISCOVER VIETNAM, ON US",
+    title: "KHÁM PHÁ VIỆT NAM CÙNG CHÚNG TÔI",
     subtitle:
-      "A Free Cultural Journey for International Students · by Onetrip with Local",
+      "Hành trình văn hóa miễn phí dành cho sinh viên quốc tế · cùng Onetrip with Local",
     description:
       "Một chương trình tour văn hóa hoàn toàn miễn phí dành cho 40 sinh viên quốc tế đến từ 10 quốc gia, được tổ chức đúng dịp kỷ niệm 80 năm Quốc khánh Việt Nam.",
-    image: images.hanoi,
-    category: "FEATURED PROJECT",
+    image: images.project,
+    imageCaption: "Hà Nội · Khoảnh khắc từ hành trình văn hóa",
+    category: "DỰ ÁN NỔI BẬT",
     badge: "Onetrip with Local",
     role: "Đóng góp ý tưởng · Hỗ trợ triển khai tour · Đồng hành cùng sinh viên quốc tế",
     roleDescription:
@@ -36,11 +38,13 @@ export const projects: Project[] = [
   {
     id: "lynhhins-hanoi-recommendations",
     number: "02",
-    title: "Lynhhin's Hanoi Recommendations",
+    title: "Gợi ý khám phá Hà Nội cùng Lynhhin",
     subtitle: "Khám phá Hà Nội từ góc nhìn của một người địa phương",
     description:
       "Một danh sách gợi ý trải nghiệm Hà Nội dành cho du khách, tập trung vào văn hóa, ẩm thực và những trải nghiệm mang dấu ấn bản địa.",
-    image: images.hanoi,
+    image: images.recommendations,
+    modalImage: images.recommendationModal,
+    imageCaption: "Hà Nội qua gợi ý của Lynhhin",
     category: "GỢI Ý TRẢI NGHIỆM ĐỊA PHƯƠNG",
     badge: "NextbyLocal",
     role: "Tổng hợp, chọn lọc & xây dựng gợi ý trải nghiệm Hà Nội",

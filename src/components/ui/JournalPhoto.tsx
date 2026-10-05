@@ -6,6 +6,9 @@ type JournalPhotoProps = {
   className?: string;
   sizes?: string;
   priority?: boolean;
+  quality?: 75 | 85;
+  fit?: "cover" | "contain";
+  aspectRatio?: number;
 };
 
 export function JournalPhoto({
@@ -13,18 +16,24 @@ export function JournalPhoto({
   className = "",
   sizes = "(max-width: 767px) 100vw, 50vw",
   priority = false,
+  quality = priority ? 85 : 75,
+  fit = "cover",
+  aspectRatio,
 }: JournalPhotoProps) {
   return (
-    <div className={`journal-photo ${className}`}>
+    <div
+      className={`journal-photo ${className}`}
+      style={aspectRatio ? { aspectRatio } : undefined}
+    >
       <Image
         src={image.src}
         alt={image.alt}
         fill
         sizes={sizes}
-        priority={priority}
-        quality={priority ? 85 : 75}
+        preload={priority}
+        quality={quality}
         style={{
-          objectFit: "cover",
+          objectFit: fit,
           objectPosition: image.position ?? "center",
         }}
       />

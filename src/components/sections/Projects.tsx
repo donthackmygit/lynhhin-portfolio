@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLanguage } from "@/components/language/LanguageProvider";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JournalPhoto } from "@/components/ui/JournalPhoto";
+import { JournalDate } from "@/components/ui/JournalDate";
 import { Reveal, Stagger } from "@/components/ui/Reveal";
 import { Dialog } from "@/components/ui/Dialog";
 import { ProjectLink } from "@/components/ui/ProjectLink";
@@ -15,6 +16,7 @@ export function Projects() {
   } = useLanguage();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = projects.find((project) => project.id === selectedId);
+  const selectedImage = selected?.modalImage ?? selected?.image;
   const copy = sectionCopy.projects;
 
   return (
@@ -47,12 +49,17 @@ export function Projects() {
                   <JournalPhoto
                     image={project.image}
                     className="project-photo"
+                    aspectRatio={
+                      project.image.width && project.image.height
+                        ? project.image.width / project.image.height
+                        : undefined
+                    }
                   />
                   <span className="project-image-index">
                     {ui.projectLabel} / {project.number}
                   </span>
                   <span className="project-image-caption">
-                    {ui.projectImageCaption}
+                    {project.imageCaption ?? ui.projectImageCaption}
                   </span>
                   <span className="project-image-open">
                     <Plus size={22} />
@@ -62,7 +69,11 @@ export function Projects() {
                   <div className="project-topline">
                     <span className="eyebrow">{project.category}</span>
                     {project.year && (
-                      <span className="project-year">{project.year}</span>
+                      <JournalDate
+                        className="project-year"
+                        year={project.year}
+                        month={project.month}
+                      />
                     )}
                   </div>
                   <span className="project-number" aria-hidden="true">
@@ -115,18 +126,32 @@ export function Projects() {
         title={selected?.title ?? ui.projectDetails}
         className="project-dialog"
       >
-        {selected && (
+        {selected && selectedImage && (
           <>
             <JournalPhoto
-              image={selected.image}
+              image={selectedImage}
               className="dialog-photo"
               sizes="(max-width: 767px) 95vw, 820px"
+              fit="contain"
+              aspectRatio={
+                selectedImage.width && selectedImage.height
+                  ? selectedImage.width / selectedImage.height
+                  : undefined
+              }
             />
             <div className="dialog-content">
               <div className="dialog-eyebrow">
                 <span className="eyebrow">
                   {selected.category}
-                  {selected.year ? ` / ${selected.year}` : ""}
+                  {selected.year && (
+                    <>
+                      {" / "}
+                      <JournalDate
+                        year={selected.year}
+                        month={selected.month}
+                      />
+                    </>
+                  )}
                 </span>
                 {selected.badge && (
                   <span className="sample-badge">{selected.badge}</span>

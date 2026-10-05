@@ -5,11 +5,22 @@ import { useLanguage } from "@/components/language/LanguageProvider";
 
 export function Footer() {
   const {
-    content: { profile, images, ui },
+    content: { profile, images, projects, heroCarousel, ui },
   } = useLanguage();
+  const displayedImages = [
+    ...heroCarousel,
+    images.portrait,
+    ...projects.flatMap((project) =>
+      project.modalImage
+        ? [project.image, project.modalImage]
+        : [project.image],
+    ),
+  ];
   const credits = Array.from(
     new Map(
-      Object.values(images).map((image) => [image.source, image]),
+      displayedImages
+        .filter((image) => /^https?:\/\//.test(image.source))
+        .map((image) => [image.source, image]),
     ).values(),
   );
 
@@ -33,22 +44,24 @@ export function Footer() {
           </span>
           <span>{profile.footer.note}</span>
         </div>
-        <details className="photo-credits">
-          <summary>{ui.photoCredits}</summary>
-          <div>
-            {credits.map((image) => (
-              <a
-                key={image.source}
-                href={image.source}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {image.credit}
-                <ArrowUpRight size={12} />
-              </a>
-            ))}
-          </div>
-        </details>
+        {credits.length > 0 && (
+          <details className="photo-credits">
+            <summary>{ui.photoCredits}</summary>
+            <div>
+              {credits.map((image) => (
+                <a
+                  key={image.source}
+                  href={image.source}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {image.credit}
+                  <ArrowUpRight size={12} />
+                </a>
+              ))}
+            </div>
+          </details>
+        )}
       </div>
     </footer>
   );
