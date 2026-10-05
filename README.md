@@ -45,14 +45,14 @@ Timeline hỗ trợ trường `month` từ 1 đến 12 trong `src/data/experienc
 
 ## Ảnh & CV
 
-Ảnh và CV gốc do người dùng cung cấp nằm trong `documents/`. Bản dùng trên website được lưu tại `public/images/` và `public/documents/`:
+Ảnh và CV dùng trên website được lưu tại `public/images/` và `public/documents/`:
 
 - `public/images/hero/carousel/`: 15 ảnh Hà Nội. `heroCarousel` trong `images.ts` quy định thứ tự, kích thước và alt text; bản tiếng Anh đổi alt text trong `english.ts`. Carousel tự chuyển sau 6 giây, từ ảnh cuối quay về ảnh đầu; hai nút ở hai cạnh cho phép chuyển thủ công.
-- `public/images/about/lynhhin.jpg`: ảnh Về tôi, có hiệu ứng hover và cửa sổ xem ảnh gốc trên nền đen.
+- `public/images/about/new.jpg`: ảnh Về tôi, có hiệu ứng hover và cửa sổ xem ảnh gốc trên nền đen.
 - `public/images/projects/`: ảnh thẻ dự án và ảnh cửa sổ chi tiết. `image` và `modalImage` trong `projects.ts` chọn ảnh cho từng vị trí; `englishProjects` chọn cùng ảnh với alt text tiếng Anh. Khung ảnh modal giữ đúng tỉ lệ gốc để không tạo khoảng trống.
 - `public/documents/Khuat-Nguyen-Thao-Linh-CV.pdf`: CV thật, liên kết qua `profile.cv`. Nút tải CV nằm cạnh nút gửi email ở phần Liên hệ. Có thể đặt `profile.cv` thành `null` để ẩn nút khi chưa có CV.
 
-Khi thay ảnh, cập nhật đường dẫn và kích thước thực tế trong `images.ts`, đồng thời cập nhật alt text tương ứng ở `english.ts`. Không cần sửa đường dẫn rải rác trong component. Các file gốc trong `documents/` được giữ để thuận tiện thay nội dung về sau.
+Khi thay ảnh, cập nhật đường dẫn và kích thước thực tế trong `images.ts`, đồng thời cập nhật alt text tương ứng ở `english.ts`. Không cần sửa đường dẫn rải rác trong component.
 
 ## Animation & accessibility
 

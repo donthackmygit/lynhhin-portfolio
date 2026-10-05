@@ -21,6 +21,7 @@ export type Locale = "vi" | "en";
 
 const vietnameseUi = {
   skipToContent: "Đến nội dung chính",
+  introTitle: "Điểm đến tiếp theo là...",
   downloadCv: "Tải CV",
   contact: "Liên hệ",
   contactName: "Liên hệ Lynhhin",
@@ -63,6 +64,7 @@ const vietnameseUi = {
 
 const englishUi = {
   skipToContent: "Skip to main content",
+  introTitle: "The next destination is...",
   downloadCv: "Download CV",
   contact: "Contact",
   contactName: "Contact Lynhhin",

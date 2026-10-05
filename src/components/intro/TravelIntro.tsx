@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import type { gsap } from "gsap";
+import { useLanguage } from "@/components/language/LanguageProvider";
 import { CloudTransition } from "./CloudTransition";
 import { WorldMap } from "./WorldMap";
 import { hasSeenIntro, markIntroSeen } from "./intro-session";
@@ -17,6 +18,10 @@ const COVER_TIME = 3.5;
 const END_TIME = 4.2;
 
 export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
+  const {
+    locale,
+    content: { ui },
+  } = useLanguage();
   const rootRef = useRef<HTMLDivElement>(null);
   const finishRef = useRef<(() => void) | null>(null);
   const startedAtRef = useRef<number | null>(null);
@@ -333,7 +338,9 @@ export function TravelIntro({ onReveal, onComplete }: TravelIntroProps) {
             EXPLORE THE WORLD
             <span />
           </p>
-          <p className="intro-title">Every journey leads somewhere.</p>
+          <p className="intro-title" lang={locale}>
+            {ui.introTitle}
+          </p>
         </div>
         <div className="intro-atlas">
           <WorldMap />
